@@ -11,8 +11,9 @@ public class ReceiveSMSActivity extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_co_pilot_main);
-//        messageBox=(TextView)findViewById(R.id.messageBox);
+        setContentView(R.layout.receive_sms_activity);
+        messageBox=(TextView)findViewById(R.id.messages);
+        messageBox.setText("Messages will go in here\n");
     }
     
     public static void updateMessageBox(String msg)

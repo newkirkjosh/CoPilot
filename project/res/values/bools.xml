@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="action_bar_home">false</bool>
+    <bool name="button_home_on">false</bool>
+    <bool name="button_home_off">true</bool>
+</resources>

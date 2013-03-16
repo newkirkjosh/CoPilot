@@ -22,12 +22,11 @@
             android:label="@string/title_activity_co_pilot_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <receiver android:name=".TextMessageReceiver" >
+        <receiver android:name="com.copilot.app.receivers.TextMessageReceiver" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>

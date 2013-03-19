@@ -4,11 +4,19 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_co_pilot_main">CoPilot</string>
-    <string name="slide_menu_home">Home</string>
-    <string name="slide_menu_log">Log</string>
-    <string name="slide_menu_ice">I.C.E.</string>
-    <string name="slide_menu_incident">Incident Assistant</string>
-    <string name="slide_menu_settings">Settings</string>
     <string name="launch_auto_reply">Auto Reply!</string>
+    <string name="sample_trip_text">LAST TRIP\n47 Messages\n11 Calls</string>
+    <string-array name="spinner_message_array">
+        <item >This is the default auto-reponse. We suggest changing it! :]</item>
+        <item >Delivering pizza! I\'ll get back to you!</item>
+        <item >The road beckons me! I\'ll get back to you once I run out of gas!</item>
+    </string-array>
+    <string-array name="slide_menu_options">
+        <item >Home</item>
+        <item >Log</item>
+        <item >I.C.E.</item>
+        <item >Incident Assistant</item>
+        <item >Settings</item>
+    </string-array>
 
 </resources>

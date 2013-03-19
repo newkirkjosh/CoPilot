@@ -6,14 +6,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.slidingmenu.lib.SlidingMenu;
+import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class CoPilotMainActivity extends SherlockActivity {
+public class CoPilotMainActivity extends SlidingFragmentActivity {
 
 	Button _launchButton;
 	public static SharedPreferences mSharedPrefs;
@@ -22,17 +24,28 @@ public class CoPilotMainActivity extends SherlockActivity {
 	
 	public static String KEY_AUTOMATED_RESPONSE = "auto_repsonse";
 	public static String KEY_INCOMING_NUMBER = "incoming_number";
+	
+	ImageButton mOnButton;
+	ImageButton mOffButton;
+	Spinner mMsgPicker;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_co_pilot_main);
+		setContentView(R.layout.copilot_main);
+		setBehindContentView(R.layout.slide_menu_list);
 		
 		mSharedPrefs = getPreferences(MODE_PRIVATE);
 		mPrefsEditor = mSharedPrefs.edit();
 		
-		_launchButton = (Button) findViewById(R.id.button_launch_autoreply);
-		_launchButton.setOnClickListener(startCoPilot);
+//		_launchButton = (Button) findViewById(R.id.button_launch_autoreply);
+//		_launchButton.setOnClickListener(startCoPilot);
+		
+		mOnButton = (ImageButton)findViewById(R.id.button_on);
+		mOffButton = (ImageButton)findViewById(R.id.button_off);
+		mMsgPicker = (Spinner)findViewById(R.id.spinner_message_picker);
+		
+		mOnButton.setOnClickListener(startCoPilot);
 		
 		final ActionBar ab = getSupportActionBar();
 		ab.setHomeButtonEnabled(true);
@@ -76,7 +89,7 @@ public class CoPilotMainActivity extends SherlockActivity {
 		switch (item.getItemId()) {
 			case android.R.id.home:
 				Log.d("actionbarhome", "pressed");
-				mSlidingMenu.toggle();
+				toggle();
 				break;
 			default:
 				break;

@@ -27,7 +27,7 @@ public class TextMessageReceiver extends BroadcastReceiver {
 			
 			if( phoneNum == "" ){
 				phoneNum = msg.getOriginatingAddress();
-				CoPilotMainActivity.updatePreferences(CoPilotMainActivity.KEY_INCOMING_NUMBER, phoneNum);
+				CoPilotMainActivity.updateStringPreference(CoPilotMainActivity.KEY_INCOMING_NUMBER, phoneNum);
 //				Log.d("phoneNumChanged", phoneNum + " phoneNum value");
 			}
 			

@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,20 +26,21 @@ public class ReceiveSMSActivity extends CoPilotMainActivity {
 
 		messageBox = (TextView) findViewById(R.id.messages);
 		messageBox.setText("Messages will go in here\n");
+		messageBox.setClickable(false);
 		
 		autoMessageBox = (TextView)findViewById(R.id.auto_msg_box);
 		autoMessageBox.setHint("Enter response here!");
 
-		Button sendButton = (Button) findViewById(R.id.sendButton);
-		sendButton.setOnClickListener(new OnClickListener() {
-
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				mPrefsEditor.putString(KEY_AUTOMATED_RESPONSE,
-						messageBox.getText().toString()).commit();
-				send();
-			}
-		});
+//		Button sendButton = (Button) findViewById(R.id.sendButton);
+//		sendButton.setOnClickListener(new OnClickListener() {
+//
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				mPrefsEditor.putString(KEY_AUTOMATED_RESPONSE,
+//						messageBox.getText().toString()).commit();
+//				send();
+//			}
+//		});
 	}
 
 	public static void updateMessageBox(String msg) {

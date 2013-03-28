@@ -11,12 +11,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:clickable="false"
         android:ems="10"
+        android:focusable="false"
         android:inputType="textMultiLine" >
-
-        <requestFocus />
     </EditText>
 
+    <!--
     <Button
         android:id="@+id/sendButton"
         android:layout_width="wrap_content"
@@ -25,6 +26,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="74dp"
         android:text="Send!" />
+    -->
 
     <EditText
         android:id="@+id/auto_msg_box"
@@ -33,6 +35,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="38dp"
-        android:ems="10" />
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

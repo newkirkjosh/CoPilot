@@ -10,7 +10,6 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/actionbar_home"
         android:adjustViewBounds="@bool/action_bar_home" />
     
     <TextView

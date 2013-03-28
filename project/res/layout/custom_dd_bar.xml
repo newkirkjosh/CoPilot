@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="50dp" >
+
+    <ImageView
+        android:id="@+id/custom_spinner_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/entrybox" />
+
+    <ImageView
+        android:id="@+id/custom_spinner_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/custom_spinner_bg"
+        android:layout_alignRight="@+id/custom_spinner_bg"
+        android:src="@drawable/hs_b" />
+
+</RelativeLayout>

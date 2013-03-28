@@ -28,7 +28,7 @@ public class SendSMSActivity extends CoPilotMainActivity {
 		// make message text field object
 //		msgTextField = (EditText) findViewById(R.id.msgTextField);
 		// make send button object
-		sendButton = (Button) findViewById(R.id.sendButton);
+//		sendButton = (Button) findViewById(R.id.sendButton);s
 		// make phone number field object
 //		phoneTextField = (EditText) findViewById(R.id.phoneTextField);
 

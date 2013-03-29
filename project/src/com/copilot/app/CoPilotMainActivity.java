@@ -32,8 +32,7 @@ public class CoPilotMainActivity extends SlidingFragmentActivity {
 //	private ActivityManager mActivityMan;
 //	private List<RunningAppProcessInfo> mAppInfo;
 
-	ImageButton mOnButton;
-	ImageButton mOffButton;
+	private ImageButton mActiButton;
 	Spinner mMsgPicker;
 
 	@Override
@@ -47,6 +46,7 @@ public class CoPilotMainActivity extends SlidingFragmentActivity {
 		clearPreferences();
 
 		mMsgPicker = (Spinner) findViewById(R.id.spinner_message_picker);
+		mActiButton = (ImageButton) findViewById(R.id.acti_button);
 
 		setSwitchProperties();
 
@@ -87,62 +87,62 @@ public class CoPilotMainActivity extends SlidingFragmentActivity {
 		Log.d("properties", switchCheck + " is the current setting");
 
 		// OnButton properties
-		if (mOnButton != null) {
-			mOnButton.setOnClickListener(startCoPilot);
-			if ( switchCheck ) {
-				mOnButton.setPressed(switchCheck);
-				mOffButton.setPressed(!switchCheck);
-			}
-		}
-
-		// OffButton properties
-		if (mOffButton != null) {
-			mOffButton.setOnClickListener(stopCoPilot);
-			if ( !switchCheck ) {
-				mOnButton.setPressed(switchCheck);
-				mOffButton.setPressed(!switchCheck);
-			}
-		}
+//		if (mOnButton != null) {
+//			mOnButton.setOnClickListener(startCoPilot);
+//			if ( switchCheck ) {
+//				mOnButton.setPressed(switchCheck);
+//				mOffButton.setPressed(!switchCheck);
+//			}
+//		}
+//
+//		// OffButton properties
+//		if (mOffButton != null) {
+//			mOffButton.setOnClickListener(stopCoPilot);
+//			if ( !switchCheck ) {
+//				mOnButton.setPressed(switchCheck);
+//				mOffButton.setPressed(!switchCheck);
+//			}
+//		}
 	}
 
 	/*
 	 * Handler that launches CoPilot once the on button is clicked
 	 */
-	View.OnClickListener startCoPilot = new View.OnClickListener() {
-
-		public void onClick(View launchButton) {
-
-			updateBooleanPreference(KEY_BOOL_RESPONSE, true);
-			mOnButton.setPressed(mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, false));
-			mOffButton.setPressed(!mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, false));
-
-			Intent intent = new Intent(launchButton.getContext(),
-					ReceiveSMSActivity.class);
-			if (intent != null && mOnButton.isPressed()) {
-				startActivityForResult(intent, RC_MAIN_SWITCH);
-//				mAppInfo = mActivityMan.getRunningAppProcesses();
-//				Log.d("App info", mAppInfo.toString());
-			}
-		}
-	};
+//	View.OnClickListener startCoPilot = new View.OnClickListener() {
+//
+//		public void onClick(View launchButton) {
+//
+//			updateBooleanPreference(KEY_BOOL_RESPONSE, true);
+//			mOnButton.setPressed(mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, false));
+//			mOffButton.setPressed(!mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, false));
+//
+//			Intent intent = new Intent(launchButton.getContext(),
+//					ReceiveSMSActivity.class);
+//			if (intent != null && mOnButton.isPressed()) {
+//				startActivityForResult(intent, RC_MAIN_SWITCH);
+////				mAppInfo = mActivityMan.getRunningAppProcesses();
+////				Log.d("App info", mAppInfo.toString());
+//			}
+//		}
+//	};
 
 	/*
 	 * Handler that launches CoPilot once the off button is clicked
 	 */
-	View.OnClickListener stopCoPilot = new View.OnClickListener() {
-
-		public void onClick(View v) {
-
-			updateBooleanPreference(KEY_BOOL_RESPONSE, false);
-			mOnButton.setPressed(mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, false));
-			mOffButton.setPressed(mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, false));
-
-			if ( mOffButton.isPressed() ) {
-				finishActivity(RC_MAIN_SWITCH);
-				Log.d("Activity Stopped", "confirmed");
-			}
-		}
-	};
+//	View.OnClickListener stopCoPilot = new View.OnClickListener() {
+//
+//		public void onClick(View v) {
+//
+//			updateBooleanPreference(KEY_BOOL_RESPONSE, false);
+//			mOnButton.setPressed(mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, false));
+//			mOffButton.setPressed(mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, false));
+//
+//			if ( mOffButton.isPressed() ) {
+//				finishActivity(RC_MAIN_SWITCH);
+//				Log.d("Activity Stopped", "confirmed");
+//			}
+//		}
+//	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

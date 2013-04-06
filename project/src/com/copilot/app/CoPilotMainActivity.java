@@ -1,15 +1,17 @@
 package com.copilot.app;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
@@ -28,9 +30,6 @@ public class CoPilotMainActivity extends SlidingFragmentActivity {
 	public static String KEY_INCOMING_NUMBER = "incoming_number";
 	public static String KEY_BOOL_RESPONSE = "bool_switch";
 	public static int RC_MAIN_SWITCH = 7;
-
-//	private ActivityManager mActivityMan;
-//	private List<RunningAppProcessInfo> mAppInfo;
 
 	private ImageButton mActiButton;
 	Spinner mMsgPicker;
@@ -58,10 +57,9 @@ public class CoPilotMainActivity extends SlidingFragmentActivity {
 		// Set up sliding menu
 		mSlidingMenu = new SlidingMenu(this);
 		mSlidingMenu.setMode(SlidingMenu.LEFT);
-		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		mSlidingMenu.setShadowWidth(15);
-		mSlidingMenu.setBehindOffset(60);
-		mSlidingMenu.setFadeDegree(0.35f);
+		mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+		mSlidingMenu.setBehindWidth(240);
+		mSlidingMenu.setBehindOffset(50);
 		mSlidingMenu.setMenu(R.layout.slide_menu_list);
 	}
 
@@ -86,63 +84,7 @@ public class CoPilotMainActivity extends SlidingFragmentActivity {
 		boolean switchCheck = mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, true);
 		Log.d("properties", switchCheck + " is the current setting");
 
-		// OnButton properties
-//		if (mOnButton != null) {
-//			mOnButton.setOnClickListener(startCoPilot);
-//			if ( switchCheck ) {
-//				mOnButton.setPressed(switchCheck);
-//				mOffButton.setPressed(!switchCheck);
-//			}
-//		}
-//
-//		// OffButton properties
-//		if (mOffButton != null) {
-//			mOffButton.setOnClickListener(stopCoPilot);
-//			if ( !switchCheck ) {
-//				mOnButton.setPressed(switchCheck);
-//				mOffButton.setPressed(!switchCheck);
-//			}
-//		}
 	}
-
-	/*
-	 * Handler that launches CoPilot once the on button is clicked
-	 */
-//	View.OnClickListener startCoPilot = new View.OnClickListener() {
-//
-//		public void onClick(View launchButton) {
-//
-//			updateBooleanPreference(KEY_BOOL_RESPONSE, true);
-//			mOnButton.setPressed(mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, false));
-//			mOffButton.setPressed(!mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, false));
-//
-//			Intent intent = new Intent(launchButton.getContext(),
-//					ReceiveSMSActivity.class);
-//			if (intent != null && mOnButton.isPressed()) {
-//				startActivityForResult(intent, RC_MAIN_SWITCH);
-////				mAppInfo = mActivityMan.getRunningAppProcesses();
-////				Log.d("App info", mAppInfo.toString());
-//			}
-//		}
-//	};
-
-	/*
-	 * Handler that launches CoPilot once the off button is clicked
-	 */
-//	View.OnClickListener stopCoPilot = new View.OnClickListener() {
-//
-//		public void onClick(View v) {
-//
-//			updateBooleanPreference(KEY_BOOL_RESPONSE, false);
-//			mOnButton.setPressed(mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, false));
-//			mOffButton.setPressed(mSharedPrefs.getBoolean(KEY_BOOL_RESPONSE, false));
-//
-//			if ( mOffButton.isPressed() ) {
-//				finishActivity(RC_MAIN_SWITCH);
-//				Log.d("Activity Stopped", "confirmed");
-//			}
-//		}
-//	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -186,4 +128,58 @@ public class CoPilotMainActivity extends SlidingFragmentActivity {
 		mPrefsEditor.commit();
 		updateBooleanPreference(KEY_BOOL_RESPONSE, false);
 	}
+	
+	SpinnerAdapter mainAdapter = new SpinnerAdapter() {
+		
+		public void unregisterDataSetObserver(DataSetObserver observer) {
+			
+		}
+		
+		public void registerDataSetObserver(DataSetObserver observer) {
+			
+		}
+		
+		public boolean isEmpty() {
+			return false;
+		}
+		
+		public boolean hasStableIds() {
+			return false;
+		}
+		
+		public int getViewTypeCount() {
+			return 0;
+		}
+		
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View main = null;
+			
+			main = (Spinner)findViewById(R.id.spinner_message_picker);
+			
+			return main;
+		}
+		
+		public int getItemViewType(int position) {
+			return 0;
+		}
+		
+		public long getItemId(int position) {
+			return position;
+		}
+		
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+		
+		public View getDropDownView(int position, View convertView, ViewGroup parent) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	};
 }

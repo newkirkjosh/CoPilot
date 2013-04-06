@@ -3,5 +3,8 @@
     <color name="theme_blue">#00B4F1</color>
     <color name="theme_background">#2E3032</color>
     <color name="theme_box_background">#27282A</color>
+    <color name="theme_state_normal">#FFFFFF</color>
+    <color name="theme_state_focused">#00B4F1</color>
+    <color name="theme_state_pressed">#49494A</color>
     
 </resources>

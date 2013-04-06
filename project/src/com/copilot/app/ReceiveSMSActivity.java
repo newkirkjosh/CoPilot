@@ -1,13 +1,9 @@
 package com.copilot.app;
 
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ReceiveSMSActivity extends CoPilotMainActivity {
 
@@ -45,14 +41,13 @@ public class ReceiveSMSActivity extends CoPilotMainActivity {
 
 	public static void updateMessageBox(String msg) {
 		messageBox.append(msg);
-		mPrefsEditor.putString(KEY_AUTOMATED_RESPONSE,
-				autoMessageBox.getText().toString()).commit();
 		send();
 	}
 
 	// this is the function that gets called when you click the button
 	public static void send() {
 		Log.d("Begin send", "confirmed");
+		/*
 		// get the phone number from the phone number text field
 		// String phoneNumber = phoneTextField.getText().toString();
 		String phoneNumber = mSharedPrefs.getString(KEY_INCOMING_NUMBER,
@@ -78,6 +73,8 @@ public class ReceiveSMSActivity extends CoPilotMainActivity {
 					Toast.LENGTH_SHORT).show();
 			Log.d("failed test", "confirmed");
 		}
+		
+		*/
 
 	}
 }

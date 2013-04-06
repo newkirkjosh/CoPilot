@@ -66,11 +66,11 @@ public class ReceiveSMSActivity extends CoPilotMainActivity {
 		// make sure the fields are not empty
 		if (phoneNumber.length() > 0 && msg.length() > 0) {
 			// call the sms manager
-			PendingIntent pi = PendingIntent.getActivity(mPackageContext, 0,
-					new Intent(mPackageContext, SendSMSActivity.class), 0);
+//			PendingIntent pi = PendingIntent.getActivity(mPackageContext, 0,
+//					new Intent(mPackageContext, SendSMSActivity.class), 0);
 			SmsManager sms = SmsManager.getDefault();
 			// this is the function that does all the magic
-			sms.sendTextMessage(phoneNumber, null, msg, pi, null);
+			sms.sendTextMessage(phoneNumber, null, msg, null, null);
 			Log.d("passed test", "confirmed");
 		} else {
 			// display message if text fields are empty

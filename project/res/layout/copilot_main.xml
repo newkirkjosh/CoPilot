@@ -4,31 +4,39 @@
     android:layout_height="match_parent"
     android:background="@color/theme_background" >
 
-    <Spinner
-        android:id="@+id/spinner_message_picker"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+    <RelativeLayout
+        android:id="@+id/spinner_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:background="@color/theme_box_background"
-        android:entries="@array/spinner_message_array"
-        android:spinnerMode="dropdown" />
-     
+        android:background="@drawable/state_color" >
+
+        <Spinner
+            android:id="@+id/spinner_message_picker"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/nav_dropdown"
+            android:entries="@array/spinner_message_array"
+            android:spinnerMode="dropdown" />
+    </RelativeLayout>
+
     <ImageButton
         android:id="@+id/acti_button"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_below="@+id/spinner_message_picker"
-        android:layout_marginTop="25dp"
+        android:layout_below="@id/spinner_container"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/activation" />
-    
+        android:layout_marginTop="25dp"
+        android:background="@drawable/activation"
+        android:contentDescription="Start Recieveing Messages" />
+
     <TextView
         android:id="@+id/trip_info"
         android:layout_width="320dp"
         android:layout_height="320dp"
-        android:layout_below="@+id/acti_button"
+        android:layout_below="@id/acti_button"
         android:layout_margin="25dp"
         android:background="@color/theme_box_background"
         android:padding="10dp"

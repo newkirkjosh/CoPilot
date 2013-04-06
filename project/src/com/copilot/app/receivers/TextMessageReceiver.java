@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
-import com.copilot.app.CoPilotMainActivity;
 import com.copilot.app.ReceiveSMSActivity;
 
 public class TextMessageReceiver extends BroadcastReceiver {
@@ -27,7 +26,7 @@ public class TextMessageReceiver extends BroadcastReceiver {
 			
 			if( phoneNum == "" ){
 				phoneNum = msg.getOriginatingAddress();
-				CoPilotMainActivity.updateStringPreference(CoPilotMainActivity.KEY_INCOMING_NUMBER, phoneNum);
+//				CoPilotMainActivity.updateStringPreference(CoPilotMainActivity.KEY_INCOMING_NUMBER, phoneNum);
 //				Log.d("phoneNumChanged", phoneNum + " phoneNum value");
 			}
 			

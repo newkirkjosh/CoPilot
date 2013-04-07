@@ -1,19 +1,28 @@
 package com.copilot.app;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class CoPilotMainActivity extends SlidingFragmentActivity {
+public class CoPilotMainActivity extends SlidingFragmentActivity implements
+		OnItemClickListener {
 
 	public static final String LOG_TAG = "CoPilotMainActivity";
 
@@ -23,39 +32,34 @@ public class CoPilotMainActivity extends SlidingFragmentActivity {
 	public static int RC_MAIN_SWITCH = 7;
 
 	private ImageButton mActiButton;
-	Spinner mMsgPicker;
+
+	// Custom Spinner
+	private ListView spinnerList;
+	private LinearLayout spinnerContainer;
+	private boolean spinnerEnabled;
+	private Button spinnerButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.copilot_main);
-		setBehindContentView(R.layout.sliding_menu_list);
+		setBehindContentView(R.layout.sliding_menu_frame);
+		initCustomSpinner();
 
-		if (findViewById(R.id.fragment_container) != null) {
+		FragmentTransaction t = this.getSupportFragmentManager()
+				.beginTransaction();
+		SherlockListFragment mFrag = new MenuFragment();
+		t.replace(R.id.sliding_menu_frame, mFrag);
+		t.commit();
 
-			if (savedInstanceState != null) {
-				return;
-			}
-
-			Fragment firstFrag = new Fragment();
-			firstFrag.setArguments(getIntent().getExtras());
-
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragment_container, firstFrag).commit();
-		}
-
-		mMsgPicker = (Spinner) findViewById(R.id.spinner_message_picker);
 		mActiButton = (ImageButton) findViewById(R.id.acti_button);
 
-		addSlidingItems();
-
 		// Set up sliding menu
-		SlidingMenu menu = new SlidingMenu(this);
+		SlidingMenu menu = getSlidingMenu();
 		menu.setMode(SlidingMenu.LEFT);
 		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		menu.setFadeDegree(0.35f);
-		menu.setMenu(R.layout.sliding_menu_list);
 
 		getSupportActionBar().setIcon(R.drawable.ic_launcher);
 		getSupportActionBar().setHomeButtonEnabled(true);
@@ -67,13 +71,52 @@ public class CoPilotMainActivity extends SlidingFragmentActivity {
 		Log.d("Resume", "called");
 	}
 
-	private void addSlidingItems() {
-		ListView slidingList = (ListView) findViewById(R.id.listview_slide_menu);
-		String[] slideOptions = getResources().getStringArray(
-				R.array.slide_menu_options);
-		ArrayAdapter<String> slideAdapter = new ArrayAdapter<String>(this,
-				R.layout.slide_menu_item, R.id.slide_item_title, slideOptions);
-		slidingList.setAdapter(slideAdapter);
+	/**
+	 * Private CustomSpinner Methods
+	 */
+	private void initCustomSpinner() {
+		spinnerEnabled = false;
+		spinnerButton = (Button) findViewById(R.id.spinner);
+		spinnerButton.setText(getResources().getStringArray(
+				R.array.spinner_message_array)[0]);
+		spinnerContainer = (LinearLayout) findViewById(R.id.container);
+		spinnerList = (ListView) findViewById(R.id.options);
+		ArrayAdapter<String> adp = new ArrayAdapter<String>(this,
+				R.layout.custom_textview, getResources().getStringArray(
+						R.array.spinner_message_array));
+
+		spinnerList.setAdapter(adp);
+		spinnerList.setOnItemClickListener(this);
+	}
+
+	private void closeList() {
+		spinnerButton.setSelected(false);
+		spinnerContainer.setBackgroundColor(Color.TRANSPARENT);
+		spinnerList.setVisibility(View.GONE);
+		spinnerEnabled = false;
+	}
+
+	private void openList() {
+		spinnerButton.setSelected(true);
+		spinnerContainer.setBackgroundResource(R.drawable.border);
+		spinnerList.setVisibility(View.VISIBLE);
+		spinnerEnabled = true;
+	}
+
+	public void buttonPressed(View view) {
+		if (spinnerEnabled)
+			closeList();
+		else
+			openList();
+	}
+
+	public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+		TextView t = (TextView) view.findViewById(R.id.listText);
+		spinnerButton.setText(t.getText());
+		spinnerButton.setSelected(false);
+		spinnerContainer.setBackgroundColor(Color.BLACK);
+		spinnerList.setVisibility(View.GONE);
+		spinnerEnabled = false;
 	}
 
 	@Override

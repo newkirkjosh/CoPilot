@@ -3,6 +3,7 @@ package com.copilot.app;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
@@ -20,11 +21,16 @@ public class MenuFragment extends SherlockListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
+		View v = null;
+		
+		v = (ListView)container.findViewById(R.id.listview_slide_menu);
+		v.setOnClickListener((OnClickListener) this);
+		
 		if (savedInstanceState != null) {
 			mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
 		}
 
-		return inflater.inflate(android.R.layout.list_content, container, false);
+		return inflater.inflate(R.layout.sliding_menu_list, container, false);
 	}
 
 	@Override
@@ -49,5 +55,31 @@ public class MenuFragment extends SherlockListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
+		
+		switch (position) {
+		// Home
+		case 0:
+			
+			break;
+		//Log
+		case 1:
+			
+			break;
+		// Emergency	
+		case 2:
+			
+			break;
+		// Incident Assistant
+		case 3:
+			
+			break;
+		// Settings
+		case 4:
+			
+			break;
+
+		default:
+			break;
+		}
 	}
 }

@@ -16,6 +16,15 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockListFragment;
 
 public class MenuFragment extends SherlockListFragment {
+	
+
+	public static final Class<?>[] ACTIVITIES = {
+		CoPilotMainActivity.class,
+		EmergencyActivity.class,
+		IncidentActivity.class,
+		LoggingActivity.class,
+		SettingsActivity.class
+	};
 
 	public static final String LOG_TAG = "MenuFragment";
 
@@ -62,24 +71,18 @@ public class MenuFragment extends SherlockListFragment {
 
 		String[] slideOptions = mResources
 				.getStringArray(R.array.slide_menu_options);
-
-		SlideMenuItem home = new SlideMenuItem(slideOptions[0],
-				R.drawable.home_a);
-		SlideMenuItem log = new SlideMenuItem(slideOptions[1],
-				R.drawable.list_a);
-		SlideMenuItem emergency = new SlideMenuItem(slideOptions[2],
-				R.drawable.tri_a);
-		SlideMenuItem incident = new SlideMenuItem(slideOptions[3],
-				R.drawable.check_a);
-		SlideMenuItem settings = new SlideMenuItem(slideOptions[4],
-				R.drawable.gear_a);
-
-		adapter.add(home);
-		adapter.add(log);
-		adapter.add(emergency);
-		adapter.add(incident);
-		adapter.add(settings);
-
+		
+		int[] icons = {
+			R.drawable.home_a,
+			R.drawable.list_a,
+			R.drawable.tri_a,
+			R.drawable.check_a,
+			R.drawable.gear_a
+		};
+		
+		for (int i=0; i<slideOptions.length; i++)
+			adapter.add( new SlideMenuItem( slideOptions[i], icons[i] ));
+		
 		setListAdapter(adapter);
 	}
 
@@ -87,52 +90,13 @@ public class MenuFragment extends SherlockListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 
-		Intent temp = null;
-		Class<?> tempClass = null;
+		Class<?> nextActivity = ACTIVITIES[position];
 
-		switch (position) {
-		// Home
-		case 0:
-			if (getSherlockActivity().getClass() != CoPilotMainActivity.class) {
-				tempClass = CoPilotMainActivity.class;
-			}
-			Toast.makeText(getSherlockActivity(), "Item: Home was pressed.",
-					Toast.LENGTH_SHORT).show();
-			break;
-		// Log
-		case 1:
-			tempClass = LoggingActivity.class;
-			Toast.makeText(getSherlockActivity(), "Item: Log was pressed.",
-					Toast.LENGTH_SHORT).show();
-			break;
-		// Emergency
-		case 2:
-			tempClass = EmergencyActivity.class;
-			Toast.makeText(getSherlockActivity(),
-					"Item: Emergency was pressed.", Toast.LENGTH_SHORT).show();
-			break;
-		// Incident Assistant
-		case 3:
-			// tempClass = IncidentActivity.class;
-			Toast.makeText(getSherlockActivity(),
-					"Item: Incident Assistant was pressed.", Toast.LENGTH_SHORT)
-					.show();
-			break;
-		// Settings
-		case 4:
-			// tempClass = SettingsActivity.class;
-			Toast.makeText(getSherlockActivity(),
-					"Item: Settings was pressed.", Toast.LENGTH_SHORT).show();
-			break;
+		Toast.makeText(getSherlockActivity(),
+				"The following activity was pressed: " + nextActivity.getName(), 
+				Toast.LENGTH_SHORT).show();
 
-		default:
-			break;
-		}
-
-		if (tempClass != null) {
-			temp = new Intent(getSherlockActivity(), tempClass);
-			startActivity(temp);
-		}
+		startActivity(new Intent(getSherlockActivity(), nextActivity));
 	}
 
 	private class SlideMenuItem {

@@ -25,6 +25,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity 
+            android:name=".EmergencyActivity"
+            android:label="@string/title_activity_co_pilot_main" />
+        
+        <activity 
+            android:name=".IncidentActivity"
+            android:label="@string/title_activity_co_pilot_main" />
+        
+        <activity 
+            android:name=".LoggingActivity"
+            android:label="@string/title_activity_co_pilot_main" />
+        
+        <activity 
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_co_pilot_main" />
+        
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/title_activity_co_pilot_main" />
 
         <receiver android:name="com.copilot.app.receivers.TextMessageReceiver" >
             <intent-filter>

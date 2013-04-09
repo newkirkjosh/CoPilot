@@ -1,20 +1,20 @@
 package com.copilot.app;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-import android.os.Bundle;
-import android.util.Log;
-
-public class EmergencyActivity extends SherlockActivity {
-
-	public static final String LOG_TAG = "EmergencyActivity";
+public class SplashActivity extends SherlockActivity{
+	
+	public static final String LOG_TAG = "SplashActivity";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.temp_emergency_layout);
+		setContentView(R.layout.temp_splash_layout);
 		
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);

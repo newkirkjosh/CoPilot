@@ -3,6 +3,7 @@ package com.copilot.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -48,7 +49,7 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.copilot_main);
-		setBehindContentView(R.layout.sliding_menu_list);
+		setBehindContentView(R.layout.sliding_menu_frame);
 		initCustomSpinner();
 
 		FragmentTransaction t = this.getSupportFragmentManager()
@@ -61,15 +62,9 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 		mActiButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
+				startActivity(new Intent(CoPilotMainActivity.this, SplashActivity.class));
 			}
 		});
-
-		ListView slideMenu = (ListView) findViewById(R.id.listview_slide_menu);
-		slideMenu.setAdapter(new ArrayAdapter<String>(this,
-				R.layout.sliding_menu_list, R.id.slide_item_title,
-				getResources().getStringArray(R.array.slide_menu_options)));
 
 		// Set up sliding menu
 		SlidingMenu menu = getSlidingMenu();
@@ -85,7 +80,14 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.d("Resume", "called");
+		Log.v(LOG_TAG, "Resume called");
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.v(LOG_TAG, "Pause called.");
+		toggle();
 	}
 
 	/**

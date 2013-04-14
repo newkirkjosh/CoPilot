@@ -7,17 +7,23 @@ import com.actionbarsherlock.view.MenuItem;
 import android.os.Bundle;
 import android.util.Log;
 
-public class EmergencyActivity extends SherlockActivity {
+public class SettingsActivity extends SherlockActivity{
 
-	public static final String LOG_TAG = "EmergencyActivity";
+	public static final String LOG_TAG = "SettingsActivity";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.temp_emergency_layout);
 		
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
 	}
 	
 	@Override

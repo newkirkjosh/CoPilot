@@ -1,10 +1,15 @@
 package com.copilot.app;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -12,7 +17,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
@@ -38,6 +42,8 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 	private LinearLayout spinnerContainer;
 	private boolean spinnerEnabled;
 	private Button spinnerButton;
+	private String spinnerFirstItem;
+	private List<String> spinnerActiveList;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,12 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 		t.commit();
 
 		mActiButton = (ImageButton) findViewById(R.id.acti_button);
+		mActiButton.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				startActivity(new Intent(CoPilotMainActivity.this, SplashActivity.class));
+			}
+		});
 
 		// Set up sliding menu
 		SlidingMenu menu = getSlidingMenu();
@@ -61,29 +73,45 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		menu.setFadeDegree(0.35f);
 
-		getSupportActionBar().setIcon(R.drawable.ic_launcher);
+		getSupportActionBar().setIcon(R.drawable.launcher_maybe);
 		getSupportActionBar().setHomeButtonEnabled(true);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.d("Resume", "called");
+		Log.v(LOG_TAG, "Resume called");
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Log.v(LOG_TAG, "Pause called.");
+		toggle();
 	}
 
 	/**
 	 * Private CustomSpinner Methods
 	 */
 	private void initCustomSpinner() {
+
+		String[] options = getResources().getStringArray(
+				R.array.spinner_message_array);
+
+		spinnerActiveList = new ArrayList<String>();
+
+		for (String s : options)
+			spinnerActiveList.add(s);
+
+		spinnerFirstItem = spinnerActiveList.get(0);
+
 		spinnerEnabled = false;
 		spinnerButton = (Button) findViewById(R.id.spinner);
-		spinnerButton.setText(getResources().getStringArray(
-				R.array.spinner_message_array)[0]);
+		spinnerButton.setText(spinnerFirstItem);
 		spinnerContainer = (LinearLayout) findViewById(R.id.container);
 		spinnerList = (ListView) findViewById(R.id.options);
 		ArrayAdapter<String> adp = new ArrayAdapter<String>(this,
-				R.layout.custom_textview, getResources().getStringArray(
-						R.array.spinner_message_array));
+				R.layout.custom_textview, spinnerActiveList);
 
 		spinnerList.setAdapter(adp);
 		spinnerList.setOnItemClickListener(this);
@@ -111,8 +139,14 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 	}
 
 	public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+
+		// Update spinnerList
+		spinnerActiveList.add(spinnerFirstItem);
+		spinnerActiveList.remove(pos);
+
 		TextView t = (TextView) view.findViewById(R.id.listText);
 		spinnerButton.setText(t.getText());
+		spinnerFirstItem = t.getText().toString();
 		spinnerButton.setSelected(false);
 		spinnerContainer.setBackgroundColor(Color.BLACK);
 		spinnerList.setVisibility(View.GONE);

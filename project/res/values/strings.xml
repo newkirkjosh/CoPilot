@@ -6,17 +6,36 @@
     <string name="title_activity_co_pilot_main">CoPilot</string>
     <string name="launch_auto_reply">Auto Reply!</string>
     <string name="sample_trip_text">LAST TRIP\n47 Messages\n11 Calls</string>
+
     <string-array name="spinner_message_array">
-        <item >This is the default auto-reponse. We suggest changing it! :]</item>
-        <item >Delivering pizza! I\'ll get back to you!</item>
-        <item >The road beckons me! I\'ll get back to you once I run out of gas!</item>
+        <item>This is the default auto-reponse. We suggest changing it! :]</item>
+        <item>Delivering pizza! I\'ll get back to you!</item>
+        <item>The road beckons me! I\'ll get back to you once I run out of gas!</item>
     </string-array>
     <string-array name="slide_menu_options">
-        <item >Home</item>
-        <item >Log</item>
-        <item >I.C.E.</item>
-        <item >Incident Assistant</item>
-        <item >Settings</item>
+        <item>Home</item>
+        <item>Log</item>
+        <item>I.C.E.</item>
+        <item>Incident Assistant</item>
+        <item>Settings</item>
     </string-array>
+    <string-array name="incident_group_titles">
+        <item>First Things First</item>
+        <item>Documentation</item>
+        <item>Description</item>
+        <item>Photos</item>
+    </string-array>
+
+    <!--  -->
+    
+    <string name="incident_first_text">In the event of any accident you must stop at the scene. Turn on your emergency lights for others on the road. If anyone is injured, or collision damage has caused a hazard, or if other vehicles leave the scene of the accident without stopping, alert emergency contact services. Do not advise your coverage limits or admit fault.</string>
+    <string name="incident_documentation_header_1">Incident Detail</string>
+    <string name="incident_describe_incident">Describe the incident</string>
+    <string name="incident_description_subheader_1">What happened? (include as much detail as possible)</string>
+    <string name="incident_description_subheader_2">Additional Notes</string>
+    <string name="incident_photos_title_incident">Incident</string>
+    <string name="incident_photos_title_scene">Scene</string>
+    <string name="incident_photos_title_other">Other</string>
+    <string name="incident_group_title_2">Documentation</string>
 
 </resources>

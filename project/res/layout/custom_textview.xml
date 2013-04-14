@@ -5,5 +5,4 @@
     android:layout_height="match_parent"
     android:textSize="14sp"
     android:background="@android:color/black"
-    android:textColor="@android:color/white">
-</TextView>
+    android:textColor="@android:color/white" />

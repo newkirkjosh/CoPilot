@@ -87,7 +87,6 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 	protected void onPause() {
 		super.onPause();
 		Log.v(LOG_TAG, "Pause called.");
-		toggle();
 	}
 
 	/**

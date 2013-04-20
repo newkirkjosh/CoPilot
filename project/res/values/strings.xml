@@ -15,7 +15,7 @@
     <string-array name="slide_menu_options">
         <item>Home</item>
         <item>Log</item>
-        <item>I.C.E.</item>
+        <item>Emergency Contacts</item>
         <item>Incident Assistant</item>
         <item>Settings</item>
     </string-array>
@@ -37,5 +37,6 @@
     <string name="incident_photos_title_scene">Scene</string>
     <string name="incident_photos_title_other">Other</string>
     <string name="incident_group_title_2">Documentation</string>
+    <string name="sample_clock_time">11:11</string>
 
 </resources>

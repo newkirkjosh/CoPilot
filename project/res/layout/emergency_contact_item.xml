@@ -47,11 +47,51 @@
             android:src="@drawable/nav_dropdown" />
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/contact_item_container"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal" >
-    </LinearLayout>
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/contact_call"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/ic_action_call" />
+
+        <ImageView
+            android:id="@+id/contact_message"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            android:layout_toRightOf="@+id/contact_call"
+            android:layout_marginLeft="25dp"
+            android:src="@drawable/ic_action_mail" />
+
+        <EditText
+            android:id="@+id/contact_view_num"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:layout_toRightOf="@+id/contact_message"
+            android:ems="10"
+            android:textColor="@android:color/white"
+            android:inputType="none" >
+
+            <requestFocus />
+        </EditText>
+
+        <ImageView
+            android:id="@+id/contact_edit_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/contact_view_num"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_action_edit" />
+
+    </RelativeLayout>
 
 </LinearLayout>

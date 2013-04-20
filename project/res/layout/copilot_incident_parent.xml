@@ -17,6 +17,7 @@
         android:id="@+id/parent_text"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
+        android:gravity="center_vertical"
         android:textColor="@android:color/white"
         android:layout_weight="5"
         android:textIsSelectable="false" >

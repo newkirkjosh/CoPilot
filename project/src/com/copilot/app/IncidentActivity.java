@@ -267,5 +267,7 @@ public class IncidentActivity extends SherlockActivity implements
 
 			return photosView;
 		}
+		
+		
 	}
 }

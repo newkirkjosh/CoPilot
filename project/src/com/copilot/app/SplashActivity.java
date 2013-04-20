@@ -7,10 +7,13 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-public class SplashActivity extends SherlockActivity{
-	
+public class SplashActivity extends SherlockActivity {
+
 	public static final String LOG_TAG = "SplashActivity";
-	
+
+	// Create a string for the ImageView label
+	private static final String IMAGEVIEW_TAG = "icon bitmap";
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -18,14 +21,15 @@ public class SplashActivity extends SherlockActivity{
 		
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
 		finish();
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.activity_co_pilot_main, menu);

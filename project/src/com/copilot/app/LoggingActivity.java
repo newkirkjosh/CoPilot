@@ -1,17 +1,16 @@
 package com.copilot.app;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 
 public class LoggingActivity extends SherlockFragmentActivity implements OnItemClickListener{
@@ -68,7 +67,7 @@ public class LoggingActivity extends SherlockFragmentActivity implements OnItemC
 		switch (position) {
 		// Inbox
 		case 0:
-//			tempFrag = new LoggingFragment();
+			
 			break;
 		// Location
 		case 1:

@@ -28,6 +28,7 @@ public class EmergencyActivity extends SherlockListActivity {
 		super.onListItemClick(l, v, position, id);
 		
 		// Set up db calls for pulling in stored contact data
+		
 	}
 	
 	@Override
@@ -47,7 +48,7 @@ public class EmergencyActivity extends SherlockListActivity {
 
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Log.d("actionbarhome", "pressed");
+			Log.d(LOG_TAG, "ActionBar back pressed");
 			finish();
 			break;
 		default:

@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- Incident Detail Header -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/incident_documentation_header_1"
+            android:textColor="@color/theme_blue" >
+        </TextView>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@color/theme_blue" />
+    </LinearLayout>
+
+    <!-- Select Date and Time -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:gravity="left"
+            android:text="Date and Time of Accident"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/selectDate"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="datetime"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+    <!-- Select Location -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Location"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/selectLocation"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="textPostalAddress"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+    <!-- Police Department Info -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Police Department Info"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/policeInformation"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+    <!-- Police Officer Number -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Police Officer #"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/policeOfficerNum"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+    <!-- Police Report Number -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Police Report #"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/policeReportNum"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+    <!-- Other Vehicle and Parties Header -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Other Vehicle and Parties"
+            android:textColor="@color/theme_blue" >
+        </TextView>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@color/theme_blue" />
+    </LinearLayout>
+
+    <!-- Name of Driver -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Name of Driver"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/nameOfDriver"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="textCapWords"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+    <!-- Address -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Address"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="textPostalAddress"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+    <!-- Driver License Number -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Driver License #"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/driverLicense"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+    <!-- Phone Number -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Phone Number"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/phoneNumber"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+    <!-- Insurence Company -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Insurence Company"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/insurenceCompany"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+    <!-- Policy # -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Policy #"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/policyNumber"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+    <!-- Insurance Phone Number -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Phone #"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/insurancePhoneNum"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+    <!-- Vehicle License Plate -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Vehicle License #"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/vehicleLicenseNum"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+    <!-- Vehicle Make -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Make"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/vehicleMake"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+    <!-- Vehicle Model -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Model"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/vehicleModel"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+    <!-- Vehicle Year -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:gravity="left"
+            android:text="Year of Vehicle"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/yearOfVehicle"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="5"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" >
+        </EditText>
+    </LinearLayout>
+
+</LinearLayout>

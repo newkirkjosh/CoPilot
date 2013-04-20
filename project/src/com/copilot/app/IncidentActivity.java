@@ -1,99 +1,48 @@
 package com.copilot.app;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockExpandableListActivity;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-public class IncidentActivity extends SherlockExpandableListActivity {
+public class IncidentActivity extends SherlockActivity implements
+		OnGroupExpandListener {
 
 	public static final String LOG_TAG = "IncidentActivity";
+	private ExpandableListView mExpandableList;
+	private ExpandableListAdapter mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		setContentView(R.layout.copilot_incident_activity);
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
+		mExpandableList = (ExpandableListView) findViewById(R.id.expandable_list);
+		mExpandableList.setOnGroupExpandListener(this);
+		mAdapter = new ExpandableListAdapter(this, getResources()
+				.getStringArray(R.array.incident_group_titles));
+		mExpandableList.setAdapter(mAdapter);
+
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-	}
-
-	class ExpandableListAdapter extends BaseExpandableListAdapter {
-
-		private Context context;
-		private String[] groups;
-		private List<Fragment> children;
-
-		public ExpandableListAdapter(Context context) {
-			this.context = context;
-			this.groups = context.getResources().getStringArray(
-					R.array.incident_group_titles);
-			children = new ArrayList<Fragment>();
-		}
-
-		public Object getChild(int groupPosition, int childPosition) {
-			return null;
-		}
-
-		public long getChildId(int groupPosition, int childPosition) {
-			return childPosition;
-		}
-
-		public View getChildView(int groupPosition, int childPosition,
-				boolean isLastChild, View convertView, ViewGroup parent) {
-			View v = null;
-			return v;
-		}
-
-		public int getChildrenCount(int groupPosition) {
-			return children.size();
-		}
-
-		public Object getGroup(int groupPosition) {
-			return groups[groupPosition];
-		}
-
-		public int getGroupCount() {
-			return groups.length;
-		}
-
-		public long getGroupId(int groupPosition) {
-			return groupPosition;
-		}
-
-		public View getGroupView(int groupPosition, boolean isExpanded,
-				View convertView, ViewGroup parent) {
-			View v = null;
-			return v;
-		}
-
-		public boolean hasStableIds() {
-			return true;
-		}
-
-		public boolean isChildSelectable(int groupPosition, int childPosition) {
-			return true;
-		}
 	}
 
 	@Override
@@ -117,19 +66,168 @@ public class IncidentActivity extends SherlockExpandableListActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	@Override
 	public void onGroupExpand(int groupPosition) {
-		super.onGroupExpand(groupPosition);
+		int len = mAdapter.getGroupCount();
+
+		for (int i = 0; i < len; i++) {
+			if (i != groupPosition) {
+				mExpandableList.collapseGroup(i);
+			}
+		}
+
 	}
 
-	@Override
-	public void onGroupCollapse(int groupPosition) {
-		super.onGroupCollapse(groupPosition);
-	}
+	class ExpandableListAdapter extends BaseExpandableListAdapter {
 
-	@Override
-	public boolean onChildClick(ExpandableListView parent, View v,
-			int groupPosition, int childPosition, long id) {
-		return super.onChildClick(parent, v, groupPosition, childPosition, id);
+		private Context context;
+		private String[] parents;
+		private View first;
+		private View docs;
+		private View desc;
+		private View photos;
+
+		private int[] icons = { R.drawable.one, R.drawable.two,
+				R.drawable.three, R.drawable.four };
+
+		public ExpandableListAdapter(Context context, String[] parents) {
+			this.context = context;
+			this.parents = parents;
+		}
+
+		@Override
+		public Object getChild(int groupPosition, int childPosition) {
+			return groupPosition;
+		}
+
+		@Override
+		public long getChildId(int groupPosition, int childPosition) {
+			return childPosition;
+		}
+
+		@Override
+		public View getChildView(int groupPosition, int childPosition,
+				boolean isLastChild, View convertView, ViewGroup parent) {
+
+			first = inflateFirst(first, parent);
+			docs = inflateDocumentation(docs, parent);
+			desc = inflateDescription(desc, parent);
+			photos = inflatePhotos(photos, parent);
+
+			switch (groupPosition) {
+			case 0:
+				return first;
+			case 1:
+				return docs;
+			case 2:
+				return desc;
+			case 3:
+				return photos;
+			}
+			return convertView;
+		}
+
+		@Override
+		public int getChildrenCount(int groupPosition) {
+			return 1;
+		}
+
+		@Override
+		public Object getGroup(int groupPosition) {
+			return parents[groupPosition];
+		}
+
+		@Override
+		public int getGroupCount() {
+			return parents.length;
+		}
+
+		@Override
+		public long getGroupId(int groupPosition) {
+			return groupPosition;
+		}
+
+		@Override
+		public View getGroupView(int groupPosition, boolean isExpanded,
+				View convertView, ViewGroup parent) {
+			LayoutInflater inflator = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+			if (convertView == null) {
+				convertView = inflator.inflate(
+						R.layout.copilot_incident_parent, parent, false);
+			}
+
+			ImageView imageView = (ImageView) convertView
+					.findViewById(R.id.parent_icon);
+			TextView textView = (TextView) convertView
+					.findViewById(R.id.parent_text);
+
+			imageView.setImageResource(icons[groupPosition]);
+
+			textView.setText(getGroup(groupPosition).toString());
+			return convertView;
+		}
+
+		@Override
+		public boolean hasStableIds() {
+			return true;
+		}
+
+		@Override
+		public boolean isChildSelectable(int groupPosition, int childPosition) {
+			return false;
+		}
+
+		private View inflateFirst(View convertView, ViewGroup parent) {
+			LayoutInflater inflator = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+			if (convertView == null) {
+				convertView = inflator.inflate(R.layout.copilot_incident_first,
+						parent, false);
+			}
+
+			return convertView;
+		}
+
+		private View inflateDocumentation(View docView, ViewGroup parent) {
+			LayoutInflater inflator = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+			if (docView == null) {
+				docView = inflator.inflate(
+						R.layout.copilot_incident_documentation, parent, false);
+			}
+
+			// EditText datePicker = (EditText) docView
+			// .findViewById(R.id.selectDate);
+
+			return docView;
+
+		}
+
+		private View inflateDescription(View descVew, ViewGroup parent) {
+			LayoutInflater inflator = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+			if (descVew == null) {
+				descVew = inflator.inflate(
+						R.layout.copilot_incident_description, parent, false);
+			}
+
+			return descVew;
+		}
+
+		private View inflatePhotos(View photosView, ViewGroup parent) {
+			LayoutInflater inflator = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+			if (photosView == null) {
+				photosView = inflator.inflate(R.layout.copilot_incident_photos,
+						parent, false);
+			}
+
+			return photosView;
+		}
 	}
 }

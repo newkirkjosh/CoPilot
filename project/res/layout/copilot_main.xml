@@ -21,7 +21,6 @@
             android:background="@android:color/black"
             android:drawableRight="@drawable/nav_dropdown"
             android:onClick="buttonPressed"
-            android:textAlignment="viewStart"
             android:textColor="@android:color/white"
             android:textSize="14sp" />
 

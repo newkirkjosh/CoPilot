@@ -16,17 +16,12 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockListFragment;
 
 public class MenuFragment extends SherlockListFragment {
-	
 
-	public static final Class<?>[] ACTIVITIES = {
-		CoPilotMainActivity.class,
-		EmergencyActivity.class,
-		IncidentActivity.class,
-		LoggingActivity.class,
-		SettingsActivity.class
-	};
+	public static final Class<?>[] ACTIVITIES = { CoPilotMainActivity.class,
+			LoggingActivity.class, EmergencyActivity.class,
+			IncidentActivity.class, SettingsActivity.class };
 
-	public static final String LOG_TAG = "MenuFragment";
+	public static final String LOG_TAG = MenuFragment.class.getName();
 
 	private static final String ARG_POSITION = "position";
 
@@ -71,18 +66,13 @@ public class MenuFragment extends SherlockListFragment {
 
 		String[] slideOptions = mResources
 				.getStringArray(R.array.slide_menu_options);
-		
-		int[] icons = {
-			R.drawable.home_a,
-			R.drawable.list_a,
-			R.drawable.tri_a,
-			R.drawable.check_a,
-			R.drawable.gear_a
-		};
-		
-		for (int i=0; i<slideOptions.length; i++)
-			adapter.add( new SlideMenuItem( slideOptions[i], icons[i] ));
-		
+
+		int[] icons = { R.drawable.home_a, R.drawable.list_a, R.drawable.tri_a,
+				R.drawable.check_a, R.drawable.gear_a };
+
+		for (int i = 0; i < slideOptions.length; i++)
+			adapter.add(new SlideMenuItem(slideOptions[i], icons[i]));
+
 		setListAdapter(adapter);
 	}
 
@@ -92,8 +82,9 @@ public class MenuFragment extends SherlockListFragment {
 
 		Class<?> nextActivity = ACTIVITIES[position];
 
-		Toast.makeText(getSherlockActivity(),
-				"The following activity was pressed: " + nextActivity.getName(), 
+		Toast.makeText(
+				getSherlockActivity(),
+				"The following activity was pressed: " + nextActivity.getName(),
 				Toast.LENGTH_SHORT).show();
 
 		startActivity(new Intent(getSherlockActivity(), nextActivity));

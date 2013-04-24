@@ -32,7 +32,6 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 
 	public static String KEY_AUTOMATED_RESPONSE = "auto_repsonse";
 	public static String KEY_INCOMING_NUMBER = "incoming_number";
-	public static String KEY_BOOL_RESPONSE = "bool_switch";
 	public static int RC_MAIN_SWITCH = 7;
 
 	private ImageButton mActiButton;
@@ -62,7 +61,9 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 		mActiButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				startActivity(new Intent(CoPilotMainActivity.this, SplashActivity.class));
+				Intent splash = new Intent(CoPilotMainActivity.this, SplashActivity.class);
+				splash.putExtra(KEY_AUTOMATED_RESPONSE, spinnerFirstItem);
+				startActivity(splash);
 			}
 		});
 

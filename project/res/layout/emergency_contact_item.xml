@@ -50,7 +50,8 @@
     <RelativeLayout
         android:id="@+id/contact_item_container"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/contact_call"
@@ -77,6 +78,7 @@
             android:layout_marginLeft="25dp"
             android:layout_toRightOf="@+id/contact_message"
             android:ems="10"
+            android:textSize="10sp"
             android:textColor="@android:color/white"
             android:inputType="none" >
 

@@ -12,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.actionbarsherlock.app.SherlockListFragment;
+import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class MenuFragment extends SherlockListFragment {
 
@@ -87,6 +89,7 @@ public class MenuFragment extends SherlockListFragment {
 				"The following activity was pressed: " + nextActivity.getName(),
 				Toast.LENGTH_SHORT).show();
 
+		((SlidingFragmentActivity)getSherlockActivity()).toggle();
 		startActivity(new Intent(getSherlockActivity(), nextActivity));
 	}
 

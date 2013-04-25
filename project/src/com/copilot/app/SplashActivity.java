@@ -1,11 +1,14 @@
 package com.copilot.app;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -15,17 +18,22 @@ import com.copilot.app.views.DraggableView;
 public class SplashActivity extends SherlockActivity {
 
 	public static final String LOG_TAG = "SplashActivity";
-	private static final String TYPEFACE_ROBOTO = "/fonts/Roboto-Light.ttf";
+	public static String KEY_AUTOMATED_RESPONSE = "auto_repsonse";
 	private DraggableView mHiddenView;
 	private TextView mResultText;
+	private static Context mContext;
+	private static Bundle mBundle;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.splash_layout);
-		initDraggableView();
 
+		mContext = getApplicationContext();
+		mBundle = getIntent().getExtras();
+
+		initDraggableView();
 	}
 
 	@Override
@@ -97,4 +105,27 @@ public class SplashActivity extends SherlockActivity {
 		});
 	}
 
+	/**
+	 * 
+	 * Text-Message Handling
+	 * 
+	 */
+
+	public static void send(String phoneNum) {
+		Log.v(LOG_TAG, "send hit");
+		
+		String response = mBundle.getString(KEY_AUTOMATED_RESPONSE);
+
+		if (phoneNum.length() > 0 && response.length() > 0) {
+			SmsManager sms = SmsManager.getDefault();
+			sms.sendTextMessage(phoneNum, null, response, null, null);
+			Log.v(LOG_TAG, "Message sent");
+		} else {
+			// display that message could not be sent due to constraints
+			Toast.makeText(
+					mContext,
+					"Message could not be sent because either the number could not be reached or the message was null.",
+					Toast.LENGTH_SHORT).show();
+		}
+	}
 }

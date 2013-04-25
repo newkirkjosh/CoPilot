@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
-import com.copilot.app.ReceiveSMSActivity;
+import com.copilot.app.SplashActivity;
 
 public class TextMessageReceiver extends BroadcastReceiver {
 
@@ -30,9 +30,10 @@ public class TextMessageReceiver extends BroadcastReceiver {
 //				Log.d("phoneNumChanged", phoneNum + " phoneNum value");
 			}
 			
-			ReceiveSMSActivity.updateMessageBox("\nFrom: "
-					+ msg.getOriginatingAddress() + "\n" + "Message: "
-					+ msg.getMessageBody() + "\n");
+			SplashActivity.send(phoneNum);
+//			ReceiveSMSActivity.updateMessageBox("\nFrom: "
+//					+ msg.getOriginatingAddress() + "\n" + "Message: "
+//					+ msg.getMessageBody() + "\n");
 		}
 	}
 }

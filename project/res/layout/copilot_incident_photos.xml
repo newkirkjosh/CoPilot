@@ -1,108 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="300dp"
     android:gravity="center"
     android:orientation="vertical"
-    android:weightSum="3" >
+    android:weightSum="12" >
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:text="Incident"
+        android:textColor="@android:color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="4" >
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/imageOne"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:src="@drawable/camera" />
+            android:background="@drawable/camera"
+            android:contentDescription="@android:string/untitled"
+            android:tag="0" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:src="@drawable/camera" />
+            android:background="@drawable/camera"
+            android:contentDescription="@android:string/untitled"
+            android:tag="1" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:src="@drawable/camera" />
+            android:background="@drawable/camera"
+            android:contentDescription="@android:string/untitled"
+            android:tag="2" />
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:text="Scene"
+        android:textColor="@android:color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="4" >
 
-        <ImageView
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:src="@drawable/camera" />
+            android:background="@drawable/camera"
+            android:contentDescription="@android:string/untitled"
+            android:tag="3" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:src="@drawable/camera" />
+            android:background="@drawable/camera"
+            android:contentDescription="@android:string/untitled"
+            android:tag="4" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:src="@drawable/camera" />
+            android:background="@drawable/camera"
+            android:contentDescription="@android:string/untitled"
+            android:tag="5" />
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:text="Other"
+        android:textColor="@android:color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="4" >
 
-        <ImageView
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:src="@drawable/camera" />
+            android:background="@drawable/camera"
+            android:contentDescription="@android:string/untitled"
+            android:tag="6" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:src="@drawable/camera" />
+            android:background="@drawable/camera"
+            android:contentDescription="@android:string/untitled"
+            android:tag="7" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:src="@drawable/camera" />
+            android:background="@drawable/camera"
+            android:contentDescription="@android:string/untitled"
+            android:tag="8" />
     </LinearLayout>
 
 </LinearLayout>

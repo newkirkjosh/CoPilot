@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
@@ -149,30 +153,62 @@ public class EmergencyActivity extends SherlockListActivity {
 			});
 
 			// Get the current item based on the position in list
-			ContactItem temp = contacts.get(position);
+			final ContactItem temp = contacts.get(position);
 
 			// Get views to be changed for each item
-			ImageView icon = (ImageView) convertView
+			final ImageView icon = (ImageView) convertView
 					.findViewById(R.id.contact_image);
-			TextView name = (TextView) convertView
+			final TextView name = (TextView) convertView
 					.findViewById(R.id.contact_name);
-			TextView phone = (TextView) convertView
+			final TextView phone = (TextView) convertView
 					.findViewById(R.id.contact_phone_num);
-			EditText editPhone = (EditText) convertView
+			final EditText editPhone = (EditText) convertView
 					.findViewById(R.id.contact_view_num);
-			ImageView call = (ImageView) convertView
+			final ImageView call = (ImageView) convertView
 					.findViewById(R.id.contact_call);
-			ImageView message = (ImageView) convertView
+			final ImageView message = (ImageView) convertView
 					.findViewById(R.id.contact_message);
 
 			icon.setImageResource(temp.imageRes);
 			name.setText(temp.fullName);
 			phone.setText(temp.phoneNum);
 			editPhone.setText(temp.phoneNum);
-			call.setOnClickListener(null);
-			message.setOnClickListener(null);
+			editPhone.setOnEditorActionListener(new OnEditorActionListener() {
+				
+				@Override
+				public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+					
+					if( event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER ){
+						phone.setText(v.getText());
+						return true;
+					}
+					return false;
+				}
+			});
+			
+			call.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					String number = "tel:" + phone.getText().toString().trim();
+					Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse(number));
+					startActivity(callIntent);
+				}
+			});
+			
+			message.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent messageIntent = new Intent(Intent.ACTION_VIEW);
+					messageIntent.setData(Uri.parse("sms:" + phone.getText().toString().trim()));
+					startActivity(messageIntent);
+				}
+			});
 
 			return convertView;
 		}
 	}
+	
+	
 }

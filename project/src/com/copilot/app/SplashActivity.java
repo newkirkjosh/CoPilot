@@ -1,8 +1,14 @@
 package com.copilot.app;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import android.content.Context;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.DragEvent;
@@ -24,6 +30,26 @@ public class SplashActivity extends SherlockActivity {
 	private static Context mContext;
 	private static Bundle mBundle;
 	private TextMessageReceiver mBroadcastReceiver;
+	private final Handler mHandler;
+	private boolean mActive;
+	private SimpleDateFormat sdf;
+	private TextView mTimeLabel;
+
+	private final Runnable mRunnable = new Runnable() {
+		public void run() {
+			if (mActive) {
+				if (mTimeLabel != null) {
+					mTimeLabel.setText(getTime());
+				}
+				mHandler.postDelayed(mRunnable, 1000);
+
+			}
+		}
+	};
+
+	public SplashActivity() {
+		mHandler = new Handler();
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,9 +57,12 @@ public class SplashActivity extends SherlockActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.splash_layout);
 
+		mTimeLabel = (TextView) findViewById(R.id.splash_clock);
 		mContext = getApplicationContext();
 		mBundle = getIntent().getExtras();
 		mBroadcastReceiver = new TextMessageReceiver();
+		mActive = true;
+		mHandler.post(mRunnable);
 
 		initDraggableView();
 	}
@@ -89,8 +118,22 @@ public class SplashActivity extends SherlockActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+
+		// Restore preferences
+		SharedPreferences settings = getSharedPreferences("com.copilot.app", 0);
+
+		int timeFormat = settings.getInt("timeFormat", 0);
+		if (timeFormat == 1)
+			sdf = new SimpleDateFormat("KK:mm", Locale.US);
+		else
+			sdf = new SimpleDateFormat("hh:mm", Locale.US);
+
 		registerReceiver(mBroadcastReceiver, new IntentFilter(
 				"android.provider.Telephony.SMS_RECEIVED"));
+	}
+
+	private String getTime() {
+		return sdf.format(new Date(System.currentTimeMillis()));
 	}
 
 	/**

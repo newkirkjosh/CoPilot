@@ -26,9 +26,16 @@
         <item>Photos</item>
         <item>Submit</item>
     </string-array>
+    <string-array name="settings_list">
+        <item>Time</item>
+        <item>Caller Allow List</item>
+        <item>Insurance</item>
+        <item>Navigation</item>
+        <item>Music</item>
+    </string-array>
 
     <!--  -->
-    
+
     <string name="incident_first_text">In the event of any accident you must stop at the scene. Turn on your emergency lights for others on the road. If anyone is injured, or collision damage has caused a hazard, or if other vehicles leave the scene of the accident without stopping, alert emergency contact services. Do not advise your coverage limits or admit fault.</string>
     <string name="incident_documentation_header_1">Incident Detail</string>
     <string name="incident_describe_incident">Describe the incident</string>

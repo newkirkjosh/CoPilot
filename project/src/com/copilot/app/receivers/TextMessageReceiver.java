@@ -10,8 +10,8 @@ import com.copilot.app.SplashActivity;
 
 public class TextMessageReceiver extends BroadcastReceiver {
 
-	public void onReceive(Context context, Intent intent) { 
-		
+	public void onReceive(Context context, Intent intent) {
+
 		Bundle bundle = intent.getExtras();
 		String phoneNum = "";
 
@@ -23,11 +23,11 @@ public class TextMessageReceiver extends BroadcastReceiver {
 		}
 
 		for (SmsMessage msg : sms) {
-			
-			if( phoneNum == "" ){
+
+			if (phoneNum == "") {
 				phoneNum = msg.getOriginatingAddress();
 			}
-			
+
 			SplashActivity.send(phoneNum);
 		}
 	}

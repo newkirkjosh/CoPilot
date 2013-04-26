@@ -58,14 +58,15 @@ public class EmergencyActivity extends SherlockListActivity {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Log.v(LOG_TAG, "List item clicked at position " + position);
-		
-		RelativeLayout expand = (RelativeLayout)v.findViewById(R.id.contact_item_container);
-		int visibility = expand.getVisibility();
-		
-		// When the user presses the top item it should either expand or collapse the bottom section
-		if( expand.getVisibility() == View.VISIBLE ){
+
+		RelativeLayout expand = (RelativeLayout) v
+				.findViewById(R.id.contact_item_container);
+
+		// When the user presses the top item it should either expand or
+		// collapse the bottom section
+		if (expand.getVisibility() == View.VISIBLE) {
 			expand.setVisibility(View.GONE);
-		}else{
+		} else {
 			expand.setVisibility(View.VISIBLE);
 		}
 	}
@@ -132,15 +133,16 @@ public class EmergencyActivity extends SherlockListActivity {
 				convertView = LayoutInflater.from(getContext()).inflate(
 						layoutRes, null);
 			}
-			
-			final RelativeLayout expand = (RelativeLayout)convertView.findViewById(R.id.contact_item_container);
+
+			final RelativeLayout expand = (RelativeLayout) convertView
+					.findViewById(R.id.contact_item_container);
 			convertView.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
-					if( expand.getVisibility() == View.GONE ){
+					if (expand.getVisibility() == View.GONE) {
 						expand.setVisibility(View.VISIBLE);
-					}else{
+					} else {
 						expand.setVisibility(View.GONE);
 					}
 				}

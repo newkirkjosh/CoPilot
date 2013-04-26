@@ -83,7 +83,7 @@ public class IncidentActivity extends SherlockActivity implements
 
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Log.d("actionbarhome", "pressed");
+			Log.d(LOG_TAG, "ActionBar home pressed");
 			finish();
 			break;
 		default:
@@ -154,7 +154,9 @@ public class IncidentActivity extends SherlockActivity implements
 							Toast.LENGTH_LONG).show();
 				}
 
-				img.setBackgroundDrawable(bitmap);
+				if( bitmap != null ){
+					img.setBackgroundDrawable(bitmap);
+				}
 
 			} else if (resultCode == RESULT_CANCELED) {
 				Toast.makeText(this, "Request Canceled", Toast.LENGTH_LONG)

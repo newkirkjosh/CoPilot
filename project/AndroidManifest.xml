@@ -40,7 +40,8 @@
         <activity
             android:name=".IncidentActivity"
             android:label="@string/title_activity_co_pilot_main"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".LoggingActivity"
             android:label="@string/title_activity_co_pilot_main" />
@@ -56,9 +57,6 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-
-        <activity android:name=".ReceiveSMSActivity" >
-        </activity>
     </application>
 
 </manifest>

@@ -29,6 +29,7 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 		OnItemClickListener {
 
 	public static final String LOG_TAG = "CoPilotMainActivity";
+	public static final int REQ_CODE_SPLASH = 0001;
 
 	public static String KEY_AUTOMATED_RESPONSE = "auto_repsonse";
 	public static String KEY_INCOMING_NUMBER = "incoming_number";

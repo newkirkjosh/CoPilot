@@ -1,6 +1,7 @@
 package com.copilot.app;
 
 import android.content.Context;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -11,8 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
+import com.copilot.app.receivers.TextMessageReceiver;
 import com.copilot.app.views.DraggableView;
 
 public class SplashActivity extends SherlockActivity {
@@ -23,6 +23,7 @@ public class SplashActivity extends SherlockActivity {
 	private TextView mResultText;
 	private static Context mContext;
 	private static Bundle mBundle;
+	private TextMessageReceiver mBroadcastReceiver;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,35 +33,9 @@ public class SplashActivity extends SherlockActivity {
 
 		mContext = getApplicationContext();
 		mBundle = getIntent().getExtras();
+		mBroadcastReceiver = new TextMessageReceiver();
 
 		initDraggableView();
-	}
-
-	@Override
-	public void onBackPressed() {
-		super.onBackPressed();
-		finish();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.activity_co_pilot_main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			Log.d(LOG_TAG, "ActionBar home pressed");
-			finish();
-			break;
-		default:
-			break;
-		}
-
-		return super.onOptionsItemSelected(item);
 	}
 
 	/**
@@ -103,6 +78,18 @@ public class SplashActivity extends SherlockActivity {
 				return false;
 			}
 		});
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterReceiver(mBroadcastReceiver);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		registerReceiver(mBroadcastReceiver, IntentFilter.create("android.provider.Telephony.SMS_RECEIVED", null));
 	}
 
 	/**

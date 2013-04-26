@@ -26,14 +26,9 @@ public class TextMessageReceiver extends BroadcastReceiver {
 			
 			if( phoneNum == "" ){
 				phoneNum = msg.getOriginatingAddress();
-//				CoPilotMainActivity.updateStringPreference(CoPilotMainActivity.KEY_INCOMING_NUMBER, phoneNum);
-//				Log.d("phoneNumChanged", phoneNum + " phoneNum value");
 			}
 			
 			SplashActivity.send(phoneNum);
-//			ReceiveSMSActivity.updateMessageBox("\nFrom: "
-//					+ msg.getOriginatingAddress() + "\n" + "Message: "
-//					+ msg.getMessageBody() + "\n");
 		}
 	}
 }

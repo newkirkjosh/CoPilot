@@ -149,7 +149,9 @@ public class IncidentActivity extends CoPilotMainActivity implements
 							Toast.LENGTH_LONG).show();
 				}
 
-				img.setBackgroundDrawable(bitmap);
+				if (bitmap != null) {
+					img.setBackgroundDrawable(bitmap);
+				}
 
 			} else if (resultCode == RESULT_CANCELED) {
 				Toast.makeText(this, "Request Canceled", Toast.LENGTH_LONG)

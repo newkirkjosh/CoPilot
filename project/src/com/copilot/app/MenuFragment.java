@@ -29,6 +29,8 @@ public class MenuFragment extends SherlockListFragment {
 
 	private int mCurrentPosition = -1;
 
+	private View lastSelectedItem;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -44,13 +46,11 @@ public class MenuFragment extends SherlockListFragment {
 	public void onStart() {
 		super.onStart();
 
-		Bundle args = getArguments();
+	}
 
-		if (args != null) {
-
-		} else if (mCurrentPosition != -1) {
-
-		}
+	@Override
+	public void onResume() {
+		super.onResume();
 	}
 
 	@Override
@@ -89,8 +89,13 @@ public class MenuFragment extends SherlockListFragment {
 				"The following activity was pressed: " + nextActivity.getName(),
 				Toast.LENGTH_SHORT).show();
 
-		((SlidingFragmentActivity)getSherlockActivity()).toggle();
+		lastSelectedItem = v;
+
+		((SlidingFragmentActivity) getSherlockActivity()).toggle();
 		startActivity(new Intent(getSherlockActivity(), nextActivity));
+		getSherlockActivity()
+				.overridePendingTransition(R.anim.side_navigation_fade_in,
+						R.anim.side_navigation_fade_out);
 	}
 
 	private class SlideMenuItem {

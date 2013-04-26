@@ -113,7 +113,7 @@ public class SplashActivity extends SherlockActivity {
 
 	public static void send(String phoneNum) {
 		Log.v(LOG_TAG, "send hit");
-		
+
 		String response = mBundle.getString(KEY_AUTOMATED_RESPONSE);
 
 		if (phoneNum.length() > 0 && response.length() > 0) {

@@ -37,7 +37,7 @@ import com.copilot.app.camera.CameraManager;
  * 
  */
 
-public class IncidentActivity extends SherlockActivity implements
+public class IncidentActivity extends CoPilotMainActivity implements
 		OnGroupExpandListener {
 
 	public static final String LOG_TAG = "IncidentActivity";
@@ -52,7 +52,7 @@ public class IncidentActivity extends SherlockActivity implements
 	 */
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.copilot_incident_activity);
 		setupUI(findViewById(R.id.parent));
@@ -68,6 +68,11 @@ public class IncidentActivity extends SherlockActivity implements
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+
+	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 	}
@@ -80,16 +85,6 @@ public class IncidentActivity extends SherlockActivity implements
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			Log.d("actionbarhome", "pressed");
-			finish();
-			break;
-		default:
-			break;
-		}
-
 		return super.onOptionsItemSelected(item);
 	}
 

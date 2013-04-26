@@ -35,9 +35,10 @@ public class CoPilotIncidentAdapter extends BaseExpandableListAdapter {
 	private View docs;
 	private View desc;
 	private View photos;
+	private View submit;
 
 	private static final int[] ICONS = { R.drawable.one, R.drawable.two,
-			R.drawable.three, R.drawable.four };
+			R.drawable.three, R.drawable.four, R.drawable.five };
 
 	/**
 	 * Public constructor for the adapter
@@ -76,6 +77,7 @@ public class CoPilotIncidentAdapter extends BaseExpandableListAdapter {
 		docs = inflateDocumentation(docs, parent);
 		desc = inflateDescription(desc, parent);
 		photos = inflatePhotos(photos, parent);
+		submit = inflateSubmit(submit, parent);
 
 		switch (groupPosition) {
 		case 0:
@@ -86,6 +88,8 @@ public class CoPilotIncidentAdapter extends BaseExpandableListAdapter {
 			return desc;
 		case 3:
 			return photos;
+		case 4:
+			return submit;
 		}
 		return null;
 	}
@@ -205,6 +209,18 @@ public class CoPilotIncidentAdapter extends BaseExpandableListAdapter {
 		}
 
 		return photosView;
+	}
+
+	private View inflateSubmit(View submitView, ViewGroup parent) {
+
+		LayoutInflater inflator = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+		if (submitView == null) {
+			submitView = inflator.inflate(R.layout.copilot_incident_submit,
+					parent, false);
+		}
+		return submitView;
 	}
 
 	private void setupImageClickListeners(View view) {

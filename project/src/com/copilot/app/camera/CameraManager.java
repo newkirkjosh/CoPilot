@@ -35,7 +35,7 @@ public class CameraManager {
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	public static final int MEDIA_TYPE_VIDEO = 2;
 
-	private static String PATH = "/storage/emulated/0/Pictures/CoPilot/";
+	private static String imageAbsolutePath;
 
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	private static Activity mActivity;
@@ -43,8 +43,6 @@ public class CameraManager {
 
 	private static CameraManager mInstance;
 	private static Context mContext;
-
-	private static String lastImageName;
 
 	private CameraManager() {
 
@@ -99,7 +97,7 @@ public class CameraManager {
 	}
 
 	public static Bitmap retrieveImageFromPath() {
-		Bitmap bmp = BitmapFactory.decodeFile(PATH + lastImageName);
+		Bitmap bmp = BitmapFactory.decodeFile(imageAbsolutePath);
 		return bmp;
 	}
 
@@ -135,7 +133,9 @@ public class CameraManager {
 		if (type == MEDIA_TYPE_IMAGE) {
 			mediaFile = new File(mediaStorageDir.getPath() + File.separator
 					+ "IMG_" + timeStamp + ".jpg");
-			lastImageName = "IMG_" + timeStamp + ".jpg";
+			imageAbsolutePath = mediaFile.getAbsolutePath();
+
+			Log.v("imagePATH ", imageAbsolutePath);
 		} else if (type == MEDIA_TYPE_VIDEO) {
 			mediaFile = new File(mediaStorageDir.getPath() + File.separator
 					+ "VID_" + timeStamp + ".mp4");

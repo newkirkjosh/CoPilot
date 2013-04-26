@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -61,7 +62,8 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 		mActiButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				Intent splash = new Intent(CoPilotMainActivity.this, SplashActivity.class);
+				Intent splash = new Intent(CoPilotMainActivity.this,
+						SplashActivity.class);
 				splash.putExtra(KEY_AUTOMATED_RESPONSE, spinnerFirstItem);
 				startActivity(splash);
 			}
@@ -69,6 +71,8 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 
 		// Set up sliding menu
 		SlidingMenu menu = getSlidingMenu();
+		menu.setShadowWidthRes(R.dimen.shadow_width);
+		menu.setShadowDrawable(R.drawable.shadow);
 		menu.setMode(SlidingMenu.LEFT);
 		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
@@ -78,12 +82,6 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 		getSupportActionBar().setHomeButtonEnabled(true);
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Log.v(LOG_TAG, "Resume called");
-	}
-	
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -164,7 +162,6 @@ public class CoPilotMainActivity extends SlidingFragmentActivity implements
 
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Log.d("actionbarhome", "pressed");
 			toggle();
 			break;
 		default:

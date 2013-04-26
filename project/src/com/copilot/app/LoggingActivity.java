@@ -12,7 +12,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-public class LoggingActivity extends SherlockFragmentActivity implements
+public class LoggingActivity extends CoPilotMainActivity implements
 		OnItemClickListener {
 
 	public static final String LOG_TAG = "LoggingActivity";
@@ -45,15 +45,6 @@ public class LoggingActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			Log.d(LOG_TAG, "ActionBar home pressed");
-			finish();
-			break;
-		default:
-			break;
-		}
 
 		return super.onOptionsItemSelected(item);
 	}

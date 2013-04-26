@@ -29,7 +29,7 @@
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/camera"
+            android:background="@drawable/camera_button_selector"
             android:contentDescription="@android:string/untitled"
             android:tag="0" />
 
@@ -38,7 +38,7 @@
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/camera"
+            android:background="@drawable/camera_button_selector"
             android:contentDescription="@android:string/untitled"
             android:tag="1" />
 
@@ -47,7 +47,7 @@
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/camera"
+            android:background="@drawable/camera_button_selector"
             android:contentDescription="@android:string/untitled"
             android:tag="2" />
     </LinearLayout>
@@ -73,7 +73,7 @@
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/camera"
+            android:background="@drawable/camera_button_selector"
             android:contentDescription="@android:string/untitled"
             android:tag="3" />
 
@@ -82,7 +82,7 @@
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/camera"
+            android:background="@drawable/camera_button_selector"
             android:contentDescription="@android:string/untitled"
             android:tag="4" />
 
@@ -91,7 +91,7 @@
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/camera"
+            android:background="@drawable/camera_button_selector"
             android:contentDescription="@android:string/untitled"
             android:tag="5" />
     </LinearLayout>
@@ -117,7 +117,7 @@
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/camera"
+            android:background="@drawable/camera_button_selector"
             android:contentDescription="@android:string/untitled"
             android:tag="6" />
 
@@ -126,7 +126,7 @@
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/camera"
+            android:background="@drawable/camera_button_selector"
             android:contentDescription="@android:string/untitled"
             android:tag="7" />
 
@@ -135,7 +135,7 @@
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/camera"
+            android:background="@drawable/camera_button_selector"
             android:contentDescription="@android:string/untitled"
             android:tag="8" />
     </LinearLayout>

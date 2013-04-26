@@ -79,17 +79,18 @@ public class SplashActivity extends SherlockActivity {
 			}
 		});
 	}
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
 		unregisterReceiver(mBroadcastReceiver);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
-		registerReceiver(mBroadcastReceiver, IntentFilter.create("android.provider.Telephony.SMS_RECEIVED", null));
+		registerReceiver(mBroadcastReceiver, new IntentFilter(
+				"android.provider.Telephony.SMS_RECEIVED"));
 	}
 
 	/**

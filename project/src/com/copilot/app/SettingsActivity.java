@@ -38,7 +38,7 @@ public class SettingsActivity extends CoPilotMainActivity {
 				.getStringArray(R.array.settings_list);
 
 		ArrayAdapter<String> settingsAdapter = new ArrayAdapter<String>(this,
-				R.layout.settigns_item, R.id.settingsItem, settings);
+				R.layout.settings_item, R.id.settingsItem, settings);
 		settingsList.setAdapter(settingsAdapter);
 
 		settingsList.setOnItemClickListener(new OnItemClickListener() {

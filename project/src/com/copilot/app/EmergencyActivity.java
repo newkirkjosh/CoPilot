@@ -7,27 +7,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
-import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-public class EmergencyActivity extends SherlockListActivity {
+public class EmergencyActivity extends SherlockFragmentActivity implements
+		OnItemClickListener {
 
-	public static final String LOG_TAG = "EmergencyActivity";
+	public static final String LOG_TAG = EmergencyActivity.class.getName();
 
 	private static final String[] contactNames = { "Andrew Acree",
 			"Makayla Schultz", "Josh Newkirk", "Dejan Ristic" };
@@ -35,6 +40,8 @@ public class EmergencyActivity extends SherlockListActivity {
 			"859-750-7405", "859-802-0785", "859-866-9061" };
 	private static final int[] contactImages = { R.drawable.andrew,
 			R.drawable.makayla, R.drawable.josh, 0 };
+
+	public static ContactMenuAdapter contactAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,17 +57,19 @@ public class EmergencyActivity extends SherlockListActivity {
 					contactImages[i]));
 		}
 
-		ContactMenuAdapter adapter = new ContactMenuAdapter(this,
+		contactAdapter = new ContactMenuAdapter(this,
 				R.layout.emergency_contact_item, contacts);
-		setListAdapter(adapter);
+
+		ListView list = (ListView) findViewById(R.id.emergency_contact_list);
+		list.setAdapter(contactAdapter);
+		list.setOnItemClickListener(this);
 
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		Log.v(LOG_TAG, "List item clicked at position " + position);
 
 		RelativeLayout expand = (RelativeLayout) v
@@ -83,7 +92,7 @@ public class EmergencyActivity extends SherlockListActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.activity_co_pilot_main, menu);
+		getSupportMenuInflater().inflate(R.menu.emergency_menu, menu);
 		return true;
 	}
 
@@ -95,6 +104,11 @@ public class EmergencyActivity extends SherlockListActivity {
 			Log.d(LOG_TAG, "ActionBar back pressed");
 			finish();
 			break;
+		case R.id.add_contact:
+			FragmentManager manager = getSupportFragmentManager();
+			EmergencyDialogFragment fragment = new EmergencyDialogFragment();
+			fragment.show(manager, "add_contact");
+			break;
 		default:
 			break;
 		}
@@ -102,22 +116,19 @@ public class EmergencyActivity extends SherlockListActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	private class ContactItem {
-		public String fullName;
-		public String phoneNum;
-		public int imageRes;
-
-		public ContactItem(String name, String phoneNum, int imageRes) {
-			this.fullName = name;
-			this.phoneNum = phoneNum;
-			this.imageRes = imageRes;
-		}
+	public static void addContactToAdapter(ContactItem contact) {
+		Log.v(LOG_TAG, "Contact: " + contact.toString());
+		contactAdapter.add(contact);
 	}
 
-	private class ContactMenuAdapter extends ArrayAdapter<ContactItem> {
+	public static void notifyContactAdapter() {
+		contactAdapter.notifyDataSetChanged();
+	}
+
+	public class ContactMenuAdapter extends ArrayAdapter<ContactItem> {
 
 		private List<ContactItem> contacts;
-		private int layoutRes;
+		private int layoutRes = R.layout.emergency_contact_item;
 
 		public ContactMenuAdapter(Context context) {
 			super(context, 0);
@@ -128,6 +139,12 @@ public class EmergencyActivity extends SherlockListActivity {
 			super(context, viewResource, contacts);
 			this.contacts = contacts;
 			this.layoutRes = viewResource;
+		}
+
+		public ContactMenuAdapter getMenuAdapterState(Context context) {
+			ContactMenuAdapter adapter = new ContactMenuAdapter(context,
+					layoutRes, contacts);
+			return adapter;
 		}
 
 		@Override
@@ -168,47 +185,64 @@ public class EmergencyActivity extends SherlockListActivity {
 					.findViewById(R.id.contact_call);
 			final ImageView message = (ImageView) convertView
 					.findViewById(R.id.contact_message);
+			final ImageView editNum = (ImageView) convertView
+					.findViewById(R.id.contact_edit_num);
 
 			icon.setImageResource(temp.imageRes);
 			name.setText(temp.fullName);
 			phone.setText(temp.phoneNum);
 			editPhone.setText(temp.phoneNum);
-			editPhone.setOnEditorActionListener(new OnEditorActionListener() {
-				
+			editPhone.setOnKeyListener(new OnKeyListener() {
+
 				@Override
-				public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-					
-					if( event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER ){
-						phone.setText(v.getText());
+				public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+					if (event.getAction() == KeyEvent.ACTION_DOWN
+							&& event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+						phone.setText(editPhone.getText().toString());
+						Log.v(LOG_TAG, "Enter is pressed");
 						return true;
 					}
+
 					return false;
 				}
 			});
-			
+
 			call.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					String number = "tel:" + phone.getText().toString().trim();
-					Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse(number));
+					Intent callIntent = new Intent(Intent.ACTION_CALL, Uri
+							.parse(number));
 					startActivity(callIntent);
 				}
 			});
-			
+
 			message.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					Intent messageIntent = new Intent(Intent.ACTION_VIEW);
-					messageIntent.setData(Uri.parse("sms:" + phone.getText().toString().trim()));
+					messageIntent.setData(Uri.parse("sms:"
+							+ phone.getText().toString().trim()));
 					startActivity(messageIntent);
+				}
+			});
+
+			editNum.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					editPhone.requestFocus();
+					((InputMethodManager) getSystemService(EmergencyActivity.INPUT_METHOD_SERVICE))
+							.showSoftInputFromInputMethod(
+									editPhone.getWindowToken(),
+									InputMethodManager.SHOW_IMPLICIT);
 				}
 			});
 
 			return convertView;
 		}
 	}
-	
-	
 }

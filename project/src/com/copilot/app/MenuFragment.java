@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -24,7 +23,6 @@ public class MenuFragment extends SherlockListFragment {
 			IncidentActivity.class, SettingsActivity.class };
 
 	public static final String LOG_TAG = MenuFragment.class.getName();
-
 	private static final String ARG_POSITION = "position";
 
 	private int mCurrentPosition = -1;

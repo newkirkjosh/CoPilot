@@ -1,13 +1,13 @@
 package com.copilot.app;
 
+import java.io.FileNotFoundException;
+
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,11 +18,8 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.copilot.app.adapters.CoPilotIncidentAdapter;
 import com.copilot.app.camera.CameraManager;
@@ -53,6 +50,7 @@ public class IncidentActivity extends CoPilotMainActivity implements
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Log.v("ONCREATE", "ONCREATE");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.copilot_incident_activity);
 		setupUI(findViewById(R.id.parent));
@@ -65,27 +63,50 @@ public class IncidentActivity extends CoPilotMainActivity implements
 				.getStringArray(R.array.incident_group_titles), this);
 		mExpandableList.setAdapter(mAdapter);
 
+		final Resources data = (Resources) getLastCustomNonConfigurationInstance();
+		if (data != null) {
+			mAdapter.photos = data.photosView;
+			mAdapter.lastImageButton = data.lastPressedImageButton;
+
+		}
+
+	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+	    super.onConfigurationChanged(newConfig);
+
+	    // Checks the orientation of the screen
+	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+	        Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+	    } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+	        Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+	    }
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
+	public Object onRetainCustomNonConfigurationInstance() {
+		Log.v("ON RETAIN", "a;lsdkjf");
+		// restore all your data here
+		final Resources data = new Resources();
+		return data;
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.activity_co_pilot_main, menu);
-		return true;
+	protected void onDestroy() {
+		super.onDestroy();
+		Log.v("onDestroy", "onDestroy");
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		return super.onOptionsItemSelected(item);
+
+	}
+
+	class Resources {
+		ImageButton lastPressedImageButton = mAdapter.lastImageButton;
+		View photosView = mAdapter.photos;
 	}
 
 	/**
@@ -116,12 +137,14 @@ public class IncidentActivity extends CoPilotMainActivity implements
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		Log.v("OnActivityResult", " OnActivityResult ");
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 
-				LinearLayout parent = (LinearLayout) findViewById(R.id.parent);
-				ImageButton img = (ImageButton) parent.findViewWithTag(mAdapter
-						.getMostRecentImageButtonTag());
+				CameraManager cameraManager = CameraManager.getInstance(this,
+						IncidentActivity.this);
+				ImageButton img = (ImageButton) mAdapter.lastImageButton;
 
 				BitmapDrawable bitmap = null;
 
@@ -129,14 +152,16 @@ public class IncidentActivity extends CoPilotMainActivity implements
 					// from camera
 
 					bitmap = new BitmapDrawable(getResources(),
-							CameraManager.retrieveImageFromPath());
-					CameraManager.getInstance(this, IncidentActivity.this);
+							cameraManager.retrieveImageFromPath());
 
 				} else {
 					// from gallery
-
-					bitmap = new BitmapDrawable(
-							BitmapFactory.decodeFile(getPath(data.getData())));
+					try {
+						bitmap = new BitmapDrawable(
+								cameraManager.decodeUri(data.getData()));
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
 
 				}
 
@@ -164,15 +189,6 @@ public class IncidentActivity extends CoPilotMainActivity implements
 	/**
 	 * Private Methods specific to {@link IncidentActivity}.
 	 */
-
-	private String getPath(Uri uri) {
-		String[] projection = { MediaStore.Images.Media.DATA };
-		Cursor cursor = managedQuery(uri, projection, null, null, null);
-		int column_index = cursor
-				.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-		cursor.moveToFirst();
-		return cursor.getString(column_index);
-	}
 
 	private void setupUI(View view) {
 

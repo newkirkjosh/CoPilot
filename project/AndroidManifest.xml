@@ -44,7 +44,6 @@
         <activity
             android:name=".IncidentActivity"
             android:label="@string/title_activity_co_pilot_main"
-            android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".LoggingActivity"

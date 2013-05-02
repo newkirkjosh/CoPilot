@@ -1,6 +1,7 @@
 package com.copilot.app.camera;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +16,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Parcelable;
@@ -43,6 +45,7 @@ public class CameraManager {
 
 	private static CameraManager mInstance;
 	private static Context mContext;
+	private Camera mCamera;
 
 	private CameraManager() {
 
@@ -57,7 +60,7 @@ public class CameraManager {
 		return mInstance;
 	}
 
-	public static void startCaptureIntent() {
+	public void startCaptureIntent() {
 
 		fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
 
@@ -95,12 +98,39 @@ public class CameraManager {
 		mActivity.startActivityForResult(chooserIntent,
 				CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
+	
+	public Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(
+                mActivity.getContentResolver().openInputStream(selectedImage), null, o);
 
-	public static Bitmap retrieveImageFromPath() {
+        final int REQUIRED_SIZE = 100;
+
+        int width_tmp = o.outWidth, height_tmp = o.outHeight;
+        int scale = 1;
+        while (true) {
+            if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE) {
+                break;
+            }
+            width_tmp /= 2;
+            height_tmp /= 2;
+            scale *= 2;
+        }
+
+        BitmapFactory.Options o2 = new BitmapFactory.Options();
+        o2.inSampleSize = scale;
+        return BitmapFactory.decodeStream(
+        		mActivity.getContentResolver().openInputStream(selectedImage), null, o2);
+    }
+
+	public Bitmap retrieveImageFromPath() {
 		Bitmap bmp = BitmapFactory.decodeFile(imageAbsolutePath);
 		return bmp;
 	}
 
+	
+	 
 	/** Create a file Uri for saving an image or video */
 	private static Uri getOutputMediaFileUri(int type) {
 		return Uri.fromFile(getOutputMediaFile(type));
@@ -114,7 +144,7 @@ public class CameraManager {
 		File mediaStorageDir = new File(
 				Environment
 						.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-				"CoPilot");
+				"copilot");
 		// This location works best if you want the created images to be shared
 		// between applications and persist after your app has been uninstalled.
 

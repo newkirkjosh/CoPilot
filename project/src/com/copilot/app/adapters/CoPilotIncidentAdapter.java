@@ -2,6 +2,7 @@ package com.copilot.app.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.copilot.app.IncidentActivity;
 import com.copilot.app.R;
 import com.copilot.app.camera.CameraManager;
 
@@ -30,11 +32,13 @@ public class CoPilotIncidentAdapter extends BaseExpandableListAdapter {
 	private Context context;
 	private String[] parents;
 	private Activity activity;
+	private CameraManager cameraManager;
 	private String mostRecentImageTag;
+	public ImageButton lastImageButton;
 	private View first;
 	private View docs;
 	private View desc;
-	private View photos;
+	public View photos;
 	private View submit;
 
 	private static final int[] ICONS = { R.drawable.one, R.drawable.two,
@@ -53,6 +57,7 @@ public class CoPilotIncidentAdapter extends BaseExpandableListAdapter {
 		this.context = context;
 		this.parents = parents;
 		this.activity = activity;
+		this.cameraManager = CameraManager.getInstance(context, activity);
 	}
 
 	/**
@@ -232,8 +237,9 @@ public class CoPilotIncidentAdapter extends BaseExpandableListAdapter {
 
 				@Override
 				public void onClick(View v) {
-					CameraManager.getInstance(context, activity);
-					CameraManager.startCaptureIntent();
+					Log.v("CLICK", "CLICK");
+					lastImageButton = (ImageButton) v;
+					cameraManager.startCaptureIntent();
 					mostRecentImageTag = (String) v.getTag();
 
 				}

@@ -2,7 +2,6 @@ package com.copilot.app.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,16 +28,16 @@ import com.copilot.app.camera.CameraManager;
 
 public class CoPilotIncidentAdapter extends BaseExpandableListAdapter {
 
+	public static ImageButton lastImageButton;
+	public static View photos;
+
 	private Context context;
 	private String[] parents;
 	private Activity activity;
 	private CameraManager cameraManager;
-	private String mostRecentImageTag;
-	public ImageButton lastImageButton;
 	private View first;
 	private View docs;
 	private View desc;
-	public View photos;
 	private View submit;
 
 	private static final int[] ICONS = { R.drawable.one, R.drawable.two,
@@ -57,7 +56,7 @@ public class CoPilotIncidentAdapter extends BaseExpandableListAdapter {
 		this.context = context;
 		this.parents = parents;
 		this.activity = activity;
-		this.cameraManager = CameraManager.getInstance(context, activity);
+		this.cameraManager = CameraManager.getInstance(context, this.activity);
 	}
 
 	/**
@@ -152,15 +151,6 @@ public class CoPilotIncidentAdapter extends BaseExpandableListAdapter {
 	}
 
 	/**
-	 * Public methods that can be accessed by classes containing an instance of
-	 * this adapter.
-	 */
-
-	public String getMostRecentImageButtonTag() {
-		return this.mostRecentImageTag;
-	}
-
-	/**
 	 * Private Methods to be used only by this adapter.
 	 */
 
@@ -237,10 +227,8 @@ public class CoPilotIncidentAdapter extends BaseExpandableListAdapter {
 
 				@Override
 				public void onClick(View v) {
-					Log.v("CLICK", "CLICK");
 					lastImageButton = (ImageButton) v;
 					cameraManager.startCaptureIntent();
-					mostRecentImageTag = (String) v.getTag();
 
 				}
 			});

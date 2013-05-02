@@ -4,43 +4,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2" >
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Enter email address below to send report:"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" >
+    </TextView>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Email Address:"
-            android:textColor="@android:color/white"
-            android:textSize="24sp" >
-        </TextView>
-
-        <com.copilot.app.views.LinedEditText
-            android:id="@+id/email"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:imeOptions="actionDone"
-            android:inputType="textEmailAddress"
-            android:singleLine="true"
-            android:textColor="@android:color/white"
-            android:textSize="24sp" >
-        </com.copilot.app.views.LinedEditText>
-    </LinearLayout>
+    <com.copilot.app.views.LinedEditText
+        android:id="@+id/email"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+       android:layout_marginRight="15dp"
+        android:imeOptions="actionDone"
+        android:inputType="textEmailAddress"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" >
+    </com.copilot.app.views.LinedEditText>
 
     <Button
         android:id="@+id/submit"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@drawable/sliding_menu_selector"
-        android:text="Submit"
-        android:textColor="@android:color/white"
-        android:textSize="22sp" >
+        android:background="@drawable/submit_button_selector" >
     </Button>
 
 </LinearLayout>

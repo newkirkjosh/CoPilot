@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -44,13 +43,21 @@ public class IncidentActivity extends CoPilotMainActivity implements
 	private ExpandableListView mExpandableList;
 	private CoPilotIncidentAdapter mAdapter;
 
+	/*
+	 * Helper Class to save state of adapter resources we need when the activity
+	 * restarts due to configuration changes
+	 */
+	class Resources {
+		ImageButton lastPressedImageButton = CoPilotIncidentAdapter.lastImageButton;
+		View photosView = CoPilotIncidentAdapter.photos;
+	}
+
 	/**
 	 * Activity Methods
 	 */
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.v("ONCREATE", "ONCREATE");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.copilot_incident_activity);
 		setupUI(findViewById(R.id.parent));
@@ -65,48 +72,24 @@ public class IncidentActivity extends CoPilotMainActivity implements
 
 		final Resources data = (Resources) getLastCustomNonConfigurationInstance();
 		if (data != null) {
-			mAdapter.photos = data.photosView;
-			mAdapter.lastImageButton = data.lastPressedImageButton;
+			CoPilotIncidentAdapter.photos = data.photosView;
+			CoPilotIncidentAdapter.lastImageButton = data.lastPressedImageButton;
 
 		}
 
 	}
-	
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-	    super.onConfigurationChanged(newConfig);
-
-	    // Checks the orientation of the screen
-	    if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-	        Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-	    } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-	        Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-	    }
-	}
 
 	@Override
 	public Object onRetainCustomNonConfigurationInstance() {
-		Log.v("ON RETAIN", "a;lsdkjf");
 		// restore all your data here
 		final Resources data = new Resources();
 		return data;
 	}
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		Log.v("onDestroy", "onDestroy");
-	}
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		return super.onOptionsItemSelected(item);
 
-	}
-
-	class Resources {
-		ImageButton lastPressedImageButton = mAdapter.lastImageButton;
-		View photosView = mAdapter.photos;
 	}
 
 	/**
@@ -144,7 +127,7 @@ public class IncidentActivity extends CoPilotMainActivity implements
 
 				CameraManager cameraManager = CameraManager.getInstance(this,
 						IncidentActivity.this);
-				ImageButton img = (ImageButton) mAdapter.lastImageButton;
+				ImageButton img = CoPilotIncidentAdapter.lastImageButton;
 
 				BitmapDrawable bitmap = null;
 

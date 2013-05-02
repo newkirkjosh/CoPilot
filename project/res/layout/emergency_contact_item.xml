@@ -2,40 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minHeight="70dp"
     android:background="@color/theme_background"
+    android:minHeight="70dp"
     android:orientation="vertical" >
 
     <RelativeLayout
         android:id="@+id/contact_container"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:orientation="horizontal" >
 
         <ImageView
             android:id="@+id/contact_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:scaleType="fitXY"
             android:src="@drawable/pic" />
 
         <TextView
             android:id="@+id/contact_name"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:gravity="center_vertical"
+            android:layout_height="35dp"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/contact_image"
+            android:gravity="center_vertical"
             android:text="Contact Name"
             android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/contact_phone_num"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:gravity="center_vertical"
+            android:layout_height="35dp"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/contact_image"
+            android:gravity="center_vertical"
             android:text="800-123-4567"
             android:textColor="@android:color/white" />
 
@@ -43,58 +43,52 @@
             android:id="@+id/contact_selector_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:src="@drawable/nav_dropdown" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/contact_item_container"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:visibility="gone">
+        android:layout_height="70dp"
+        android:visibility="gone" >
 
         <ImageView
             android:id="@+id/contact_call"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:scaleType="fitXY"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/ic_action_call" />
+            android:layout_margin="15dp"
+            android:src="@drawable/emergency_call_button" />
 
         <ImageView
             android:id="@+id/contact_message"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:scaleType="fitXY"
+            android:layout_margin="15dp"
             android:layout_toRightOf="@+id/contact_call"
-            android:layout_marginLeft="25dp"
-            android:src="@drawable/ic_action_mail" />
+            android:src="@drawable/emergency_message_button" />
 
         <EditText
             android:id="@+id/contact_view_num"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="25dp"
             android:layout_toRightOf="@+id/contact_message"
             android:ems="10"
-            android:textSize="10sp"
+            android:inputType="phone"
             android:textColor="@android:color/white"
-            android:inputType="none" >
-
-            <requestFocus />
-        </EditText>
+            android:textIsSelectable="false"
+            android:textSize="12sp" />
 
         <ImageView
             android:id="@+id/contact_edit_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/contact_view_num"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_action_edit" />
-
+            android:src="@drawable/emergency_edit_button" />
     </RelativeLayout>
 
 </LinearLayout>

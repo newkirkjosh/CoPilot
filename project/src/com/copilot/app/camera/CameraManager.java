@@ -151,7 +151,7 @@ public class CameraManager {
 		// Create the storage directory if it does not exist
 		if (!mediaStorageDir.exists()) {
 			if (!mediaStorageDir.mkdirs()) {
-				Log.d("CoPilot", "failed to create directory");
+				Log.d(TAG, "failed to create directory");
 				return null;
 			}
 		}

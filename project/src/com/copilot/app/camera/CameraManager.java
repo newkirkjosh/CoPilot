@@ -64,7 +64,7 @@ public class CameraManager {
 
 		fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
 
-		// Camera.
+		// Get form camera
 		final List<Intent> cameraIntents = new ArrayList<Intent>();
 		final Intent captureIntent = new Intent(
 				android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -81,12 +81,12 @@ public class CameraManager {
 			cameraIntents.add(intent);
 		}
 
-		// File system.
+		// Get from gallery
 		final Intent galleryIntent = new Intent();
 		galleryIntent.setType("image/*");
 		galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
 
-		// Chooser of file system options.
+		// Merged intent for both
 		final Intent chooserIntent = Intent.createChooser(galleryIntent,
 				"Select Source");
 
@@ -98,39 +98,37 @@ public class CameraManager {
 		mActivity.startActivityForResult(chooserIntent,
 				CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
-	
+
 	public Bitmap decodeUri(Uri selectedImage) throws FileNotFoundException {
-        BitmapFactory.Options o = new BitmapFactory.Options();
-        o.inJustDecodeBounds = true;
-        BitmapFactory.decodeStream(
-                mActivity.getContentResolver().openInputStream(selectedImage), null, o);
+		BitmapFactory.Options o = new BitmapFactory.Options();
+		o.inJustDecodeBounds = true;
+		BitmapFactory.decodeStream(mActivity.getContentResolver()
+				.openInputStream(selectedImage), null, o);
 
-        final int REQUIRED_SIZE = 100;
+		final int REQUIRED_SIZE = 100;
 
-        int width_tmp = o.outWidth, height_tmp = o.outHeight;
-        int scale = 1;
-        while (true) {
-            if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE) {
-                break;
-            }
-            width_tmp /= 2;
-            height_tmp /= 2;
-            scale *= 2;
-        }
+		int width_tmp = o.outWidth, height_tmp = o.outHeight;
+		int scale = 1;
+		while (true) {
+			if (width_tmp / 2 < REQUIRED_SIZE || height_tmp / 2 < REQUIRED_SIZE) {
+				break;
+			}
+			width_tmp /= 2;
+			height_tmp /= 2;
+			scale *= 2;
+		}
 
-        BitmapFactory.Options o2 = new BitmapFactory.Options();
-        o2.inSampleSize = scale;
-        return BitmapFactory.decodeStream(
-        		mActivity.getContentResolver().openInputStream(selectedImage), null, o2);
-    }
+		BitmapFactory.Options o2 = new BitmapFactory.Options();
+		o2.inSampleSize = scale;
+		return BitmapFactory.decodeStream(mActivity.getContentResolver()
+				.openInputStream(selectedImage), null, o2);
+	}
 
 	public Bitmap retrieveImageFromPath() {
 		Bitmap bmp = BitmapFactory.decodeFile(imageAbsolutePath);
 		return bmp;
 	}
 
-	
-	 
 	/** Create a file Uri for saving an image or video */
 	private static Uri getOutputMediaFileUri(int type) {
 		return Uri.fromFile(getOutputMediaFile(type));
